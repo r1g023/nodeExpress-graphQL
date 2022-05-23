@@ -1,0 +1,28 @@
+{
+  "name": "nodeExpress-graphql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rigo0523/nodeExpress-graphQL.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rigo0523/nodeExpress-graphQL/issues"
+  },
+  "homepage": "https://github.com/rigo0523/nodeExpress-graphQL#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "express-graphql": "^0.12.0",
+    "graphql": "^15.8.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
