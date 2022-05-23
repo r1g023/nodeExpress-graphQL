@@ -12,37 +12,54 @@ const { books, authors } = require("./graphQL-Resources");
 //server
 const server = express();
 
+//author schema for book list
+const AuthorType = new GraphQLObjectType({
+  name: "Authorz",
+  description: "This represents an author of a book",
+  fields: () => ({
+    id: { type: GraphQLNonNull(GraphQLInt) },
+    name: { type: GraphQLNonNull(GraphQLString) },
+  }),
+});
+
+//Books schema for books list
 const BookType = new GraphQLObjectType({
-  name: "Book",
+  name: "Bookz",
   description: "This represents a book written by an author",
   fields: () => ({
-    id: { type: GraphQLNonNull(GraphQLint) },
+    id: { type: GraphQLNonNull(GraphQLInt) },
+    name: { type: GraphQLNonNull(GraphQLString) },
+    authorId: { type: GraphQLNonNull(GraphQLInt) },
+    author: {
+      type: AuthorType,
+      resolve: (book) => {
+        console.log("boooook------>", book);
+        return authors.find((author) => author.id === book.authorId);
+      },
+    },
   }),
 });
 
 const RootQueryType = new GraphQLObjectType({
-  name: "Query",
-  description: "Root Query",
+  name: "Queryz",
+  description: "Root Query to get list of books",
   fields: () => ({
     books: {
       type: new GraphQLList(BookType),
       description: "List of Books",
       resolve: () => books,
     },
+    authors: {
+      type: new GraphQLList(AuthorType),
+      description: "List of Authors",
+      resolve: () => authors,
+    },
   }),
 });
 
 const schema = new GraphQLSchema({
   //getting of data
-  query: new GraphQLObjectType({
-    name: "hello express",
-    fields: () => ({
-      message: {
-        type: GraphQLString,
-        resolve: () => "hello express.",
-      },
-    }),
-  }),
+  query: RootQueryType,
 });
 
 server.use("/graphql", expressGraphQL({ schema: schema, graphiql: true }));
