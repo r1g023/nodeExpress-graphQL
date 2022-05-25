@@ -132,3 +132,4 @@ server.listen(port, () =>
 );
 
 //schema, pass into graphql function, so our expressGraphQl knows what our data will look like.
+//test data without a Database
