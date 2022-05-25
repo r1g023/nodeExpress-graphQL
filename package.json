@@ -9,7 +9,12 @@
     "start": "node index.js",
     "migrate": "knex migrate:latest",
     "seed": "knex seed:run",
-    "rollback": "knex migrate:rollback"
+    "rollback": "knex migrate:rollback",
+    "migrateh": "heroku run knex migrate:latest -a node-express-graphql-api",
+    "rollbackh": "heroku run knex migrate:rollback -a node-express-graphql-api",
+    "seedh": "heroku run knex seed:run -a node-express-graphql-api",
+    "databaseh": "heroku pg:psql -a node-express-graphql-api",
+    "deploy": "git push heroku main"
   },
   "repository": {
     "type": "git",
