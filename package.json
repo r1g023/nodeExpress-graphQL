@@ -16,6 +16,9 @@
     "databaseh": "heroku pg:psql -a node-express-graphql-api",
     "deploy": "git push heroku main"
   },
+  "engines": {
+    "node": "17.6.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rigo0523/nodeExpress-graphQL.git"
