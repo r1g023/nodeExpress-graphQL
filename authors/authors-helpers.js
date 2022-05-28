@@ -22,7 +22,7 @@ async function addAuthor(data) {
   // THIS METHOD IS USEFUL WHEN USING POSTGRES
   const [newPost] = await db("authors").insert(data, ["id", "name"]);
   return newPost;
-  //   return db("authors").insert(data, "id") //.returning(id).then()
+  // return db("authors").insert(data, "id") //.returning(id).then()
   //   .then((ids) => {
   //     console.log("ids in post--->", ids);
   //     return db("authors").where({ id: ids }).limit(1);
