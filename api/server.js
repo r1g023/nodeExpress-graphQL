@@ -9,10 +9,12 @@ server.use(express.json());
 //Import routers
 const welcomeRouter = require("../welcome/welcome-router");
 const authorsRouter = require("../authors/authors-routers");
+const booksRouter = require("../books/books-router");
 
 //Server Endpoint --->
 server.use("/", welcomeRouter);
 server.use("/", authorsRouter);
+server.use("/", booksRouter);
 
 // middleware for CATCH ERROR on all endpoints of /api/messages if REST only
 server.use((err, req, res, next) => {

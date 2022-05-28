@@ -11,7 +11,7 @@ const {
 } = require("graphql");
 const Authors = require("./authors-helpers");
 
-//author schema for autor list
+//author schema for author list
 const AuthorType = new GraphQLObjectType({
   name: "Author",
   description: "This represents an author of a book",
