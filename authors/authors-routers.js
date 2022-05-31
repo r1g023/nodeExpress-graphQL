@@ -21,78 +21,74 @@ const AuthorType = new GraphQLObjectType({
   }),
 });
 
-//manipulate Authors DB through root query
-const RootQueryType = new GraphQLObjectType({
-  name: "Query",
-  description: "Root Query to get list of authors",
-  fields: () => ({
-    getAuthors: {
-      type: new GraphQLList(AuthorType),
-      description: "List of Authors..",
-      resolve: (parent, args) => {
-        return Authors.getAuthors();
-      },
-    },
-    getAuthorId: {
-      type: AuthorType,
-      description: "GET BY ID",
-      args: { id: { type: GraphQLInt } },
-      resolve: (parent, args) => {
-        return Authors.getAuthorId(args.id);
-      },
-    },
-  }),
-});
+//get list of authors
+const getAuthors = {
+  type: new GraphQLList(AuthorType),
+  description: "List of Authors..",
+  resolve: (parent, args) => {
+    return Authors.getAuthors();
+  },
+};
 
-const RootMutationType = new GraphQLObjectType({
-  name: "Mutation",
-  fields: () => ({
-    createAuthor: {
-      type: AuthorType,
-      args: {
-        name: { type: new GraphQLNonNull(GraphQLString) },
-      },
-      resolve(parent, args) {
-        console.log("args--->", args);
-        return Authors.addAuthor({ name: args.name });
-      },
-    },
-    //UPDATE THE AUTHOR
-    updateAuthorId: {
-      type: AuthorType,
-      args: {
-        id: { type: GraphQLInt },
-        name: { type: GraphQLString },
-      },
-      async resolve(parent, args) {
-        let result = await Authors.getAuthorId(args.id);
-        if (!result) throw new Error(`no id of ${args.id} found`);
-        return Authors.updateAuthor({ name: args.name }, args.id);
-      },
-    },
-    //DELETE author
-    deleteAuthor: {
-      type: AuthorType,
-      args: {
-        id: { type: GraphQLInt },
-      },
-      async resolve(parent, args) {
-        let result = await Authors.getAuthorId(args.id);
-        if (!result) throw new Error(`no id of ${args.id} found`);
-        console.log("args delete--->", args);
-        return Authors.deleteAuthor(args.id);
-      },
-    },
-  }),
-});
+//get author by an ID
+const getAuthorId = {
+  type: AuthorType,
+  description: "Get Author By ID",
+  args: { id: { type: GraphQLInt } },
+  resolve: async (parent, args) => {
+    let result = await Authors.getAuthorId(args.id);
+    if (!result) throw new Error(`no id of ${args.id} found`);
+    return result;
+  },
+};
 
-const schema = new GraphQLSchema({
-  //getting of data
-  query: RootQueryType,
-  //adding mutations CRUD
-  mutation: RootMutationType,
-});
+//create a new Author
+const createAuthor = {
+  type: AuthorType,
+  description: "create an Author",
+  args: {
+    name: { type: new GraphQLNonNull(GraphQLString) },
+  },
+  resolve(parent, args) {
+    console.log("args--->", args);
+    return Authors.addAuthor({ name: args.name });
+  },
+};
 
-router.use("/graphql", expressGraphQL({ schema: schema, graphiql: true }));
+//update author by id
+const updateAuthorId = {
+  type: AuthorType,
+  description: "update an author by ID",
+  args: {
+    id: { type: GraphQLInt },
+    name: { type: GraphQLString },
+  },
+  async resolve(parent, args) {
+    let result = await Authors.getAuthorId(args.id);
+    if (!result) throw new Error(`no id of ${args.id} found`);
+    return Authors.updateAuthor({ name: args.name }, args.id);
+  },
+};
 
-module.exports = router;
+//delete an author
+const deleteAuthor = {
+  type: AuthorType,
+  description: "delete a single author by its ID",
+  args: {
+    id: { type: GraphQLInt },
+  },
+  async resolve(parent, args) {
+    let result = await Authors.getAuthorId(args.id);
+    if (!result) throw new Error(`no id of ${args.id} found`);
+    console.log("args delete--->", args);
+    return Authors.deleteAuthor(args.id);
+  },
+};
+
+module.exports = {
+  getAuthors,
+  getAuthorId,
+  createAuthor,
+  updateAuthorId,
+  deleteAuthor,
+};
