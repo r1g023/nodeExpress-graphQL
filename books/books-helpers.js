@@ -3,6 +3,8 @@ module.exports = {
   getBooks,
   getBooksById,
   addBook,
+  updateBook,
+  deleteBook,
 };
 
 //get list of authors
@@ -20,4 +22,19 @@ async function addBook(data) {
   // THIS METHOD IS USEFUL WHEN USING POSTGRES
   const [newPost] = await db("books").insert(data, ["id", "name", "author_id"]);
   return newPost;
+}
+
+// update book by id
+function updateBook(data, id) {
+  return db("books")
+    .update(data)
+    .where("id", id)
+    .then((ids) => {
+      return db("books").where({ id: id }).first();
+    });
+}
+
+//delete book by ID
+function deleteBook(id) {
+  return db("books").where({ id }).del();
 }

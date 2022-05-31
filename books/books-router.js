@@ -1,6 +1,5 @@
 const expressGraphQL = require("express-graphql").graphqlHTTP;
 const {
-  GraphQLSchema,
   GraphQLObjectType,
   GraphQLString,
   GraphQLList,
@@ -9,6 +8,8 @@ const {
 } = require("graphql");
 
 const Books = require("./books-helpers");
+const Authors = require("../authors/authors-helpers");
+const AuthorType = require("../authors/authors-routers");
 
 //book schema for book list
 const BookType = new GraphQLObjectType({
@@ -18,6 +19,13 @@ const BookType = new GraphQLObjectType({
     id: { type: GraphQLInt },
     name: { type: new GraphQLNonNull(GraphQLString) },
     author_id: { type: GraphQLInt },
+    author: {
+      type: AuthorType,
+      resolve: async (book) => {
+        let authors = await Authors.getAuthors();
+        return authors.filter((author) => book.author_id === author.id);
+      },
+    },
   }),
 });
 
@@ -58,4 +66,38 @@ const addBook = {
   },
 };
 
-module.exports = { getBooks, getBookId, addBook };
+//update book by id
+const updateBooks = {
+  type: BookType,
+  description: "update book by Id",
+  args: {
+    id: { type: GraphQLInt },
+    name: { type: new GraphQLNonNull(GraphQLString) },
+    author_id: { type: GraphQLInt },
+  },
+  resolve: (parent, args) => {
+    return Books.updateBook(
+      { name: args.name, author_id: args.author_id },
+      args.id
+    );
+  },
+};
+
+//delete book by ID
+const deleteBook = {
+  type: BookType,
+  description: "delete a book",
+  args: { id: { type: GraphQLInt } },
+  resolve: (parent, args) => {
+    return Books.deleteBook(args.id);
+  },
+};
+
+module.exports = {
+  BookType,
+  getBooks,
+  getBookId,
+  addBook,
+  updateBooks,
+  deleteBook,
+};

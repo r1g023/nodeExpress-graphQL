@@ -1,14 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const expressGraphQL = require("express-graphql").graphqlHTTP;
-const {
-  GraphQLSchema,
-  GraphQLObjectType,
-  GraphQLString,
-  GraphQLList,
-  GraphQLInt,
-  GraphQLNonNull,
-} = require("graphql");
+const { GraphQLSchema, GraphQLObjectType } = require("graphql");
 //Authors database
 const {
   getAuthors,
@@ -16,9 +9,16 @@ const {
   createAuthor,
   updateAuthorId,
   deleteAuthor,
+  // getAuthorBooks,
 } = require("../authors/authors-routers");
 // Books database for
-const { getBooks, getBookId, addBook } = require("../books/books-router");
+const {
+  getBooks,
+  getBookId,
+  addBook,
+  updateBooks,
+  deleteBook,
+} = require("../books/books-router");
 
 //manipulate Authors and books DB through root query
 const RootQueryType = new GraphQLObjectType({
@@ -29,6 +29,7 @@ const RootQueryType = new GraphQLObjectType({
     // <--------- list of authors ----->
     getAuthors,
     getAuthorId,
+    // getAuthorBooks,
     // <--------- List of books ------>
     getBooks,
     getBookId,
@@ -44,6 +45,8 @@ const RootMutationType = new GraphQLObjectType({
     deleteAuthor,
     // <--------- Mutations for Books ------->
     addBook,
+    updateBooks,
+    deleteBook,
   }),
 });
 

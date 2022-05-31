@@ -5,10 +5,11 @@ module.exports = {
   addAuthor,
   updateAuthor,
   deleteAuthor,
+  getAuthorBooks,
 };
 
 //get list of authors
-function getAuthors() {
+function getAuthors(authorId) {
   return db("authors").select("*").orderBy("id");
 }
 
@@ -22,7 +23,7 @@ async function addAuthor(data) {
   // THIS METHOD IS USEFUL WHEN USING POSTGRES
   const [newPost] = await db("authors").insert(data, ["id", "name"]);
   return newPost;
-  // return db("authors").insert(data, "id") //.returning(id).then()
+  //   return db("authors").insert(data, "id") //.returning(id).then()
   //   .then((ids) => {
   //     console.log("ids in post--->", ids);
   //     return db("authors").where({ id: ids }).limit(1);
@@ -39,6 +40,14 @@ async function updateAuthor(data, id) {
     });
 }
 
+//delete an author
 function deleteAuthor(id) {
   return db("authors").where({ id }).del();
+}
+
+//get all books for each author
+function getAuthorBooks() {
+  return db("authors")
+    .join("books", "authors.id", "=", "books.author_id")
+    .select("books.id", "books.name", "authors.name as author");
 }

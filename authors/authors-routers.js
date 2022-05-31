@@ -1,15 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const expressGraphQL = require("express-graphql").graphqlHTTP;
 const {
-  GraphQLSchema,
   GraphQLObjectType,
   GraphQLString,
   GraphQLList,
   GraphQLInt,
   GraphQLNonNull,
 } = require("graphql");
+
 const Authors = require("./authors-helpers");
+const Books = require("../books/books-helpers");
+const { BookType } = require("../books/books-router");
 
 //author schema for author list
 const AuthorType = new GraphQLObjectType({
@@ -18,6 +19,13 @@ const AuthorType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLInt },
     name: { type: new GraphQLNonNull(GraphQLString) },
+    books: {
+      type: new GraphQLList(BookType),
+      resolve: async (author) => {
+        let result = await Books.getBooks();
+        return result.filter((book) => book.author_id === author.id);
+      },
+    },
   }),
 });
 
@@ -86,6 +94,7 @@ const deleteAuthor = {
 };
 
 module.exports = {
+  AuthorType,
   getAuthors,
   getAuthorId,
   createAuthor,
