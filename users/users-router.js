@@ -7,6 +7,7 @@ const {
 } = require("graphql");
 
 const Users = require("./users-helpers");
+const { generateToken } = require("../auth/auth-middleware");
 
 //book schema for book list
 const UserType = new GraphQLObjectType({
@@ -18,6 +19,14 @@ const UserType = new GraphQLObjectType({
     username: { type: new GraphQLNonNull(GraphQLString) },
     password: { type: new GraphQLNonNull(GraphQLString) },
     role: { type: new GraphQLNonNull(GraphQLString) },
+    token: {
+      type: GraphQLString,
+      description: "a token",
+      resolve: (parent, args) => {
+        console.log("token parent---->", parent);
+        return generateToken(parent);
+      },
+    },
   }),
 });
 
@@ -42,4 +51,4 @@ const getUserById = {
   },
 };
 
-module.exports = { getUsers, getUserById };
+module.exports = { getUsers, getUserById, UserType };

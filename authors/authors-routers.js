@@ -7,6 +7,7 @@ const {
 
 const Authors = require("./authors-helpers");
 const { AuthorType } = require("../books/books-router");
+const { restrictedUser, checkRole } = require("../auth/auth-middleware");
 
 //get list of authors
 const getAuthors = {
