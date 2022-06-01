@@ -1,7 +1,4 @@
-const express = require("express");
-const router = express.Router();
 const {
-  GraphQLObjectType,
   GraphQLString,
   GraphQLList,
   GraphQLInt,
@@ -9,25 +6,7 @@ const {
 } = require("graphql");
 
 const Authors = require("./authors-helpers");
-const Books = require("../books/books-helpers");
-const { BookType } = require("../books/books-router");
-
-//author schema for author list
-const AuthorType = new GraphQLObjectType({
-  name: "Author",
-  description: "This represents an author of a book",
-  fields: () => ({
-    id: { type: GraphQLInt },
-    name: { type: new GraphQLNonNull(GraphQLString) },
-    books: {
-      type: new GraphQLList(BookType),
-      resolve: async (author) => {
-        let result = await Books.getBooks();
-        return result.filter((book) => book.author_id === author.id);
-      },
-    },
-  }),
-});
+const { AuthorType } = require("../books/books-router");
 
 //get list of authors
 const getAuthors = {
@@ -42,7 +21,7 @@ const getAuthors = {
 const getAuthorId = {
   type: AuthorType,
   description: "Get Author By ID",
-  args: { id: { type: GraphQLInt } },
+  args: { id: { type: new GraphQLNonNull(GraphQLInt) } },
   resolve: async (parent, args) => {
     let result = await Authors.getAuthorId(args.id);
     if (!result) throw new Error(`no id of ${args.id} found`);
@@ -68,8 +47,8 @@ const updateAuthorId = {
   type: AuthorType,
   description: "update an author by ID",
   args: {
-    id: { type: GraphQLInt },
-    name: { type: GraphQLString },
+    id: { type: new GraphQLNonNull(GraphQLInt) },
+    name: { type: new GraphQLNonNull(GraphQLString) },
   },
   async resolve(parent, args) {
     let result = await Authors.getAuthorId(args.id);
@@ -83,7 +62,7 @@ const deleteAuthor = {
   type: AuthorType,
   description: "delete a single author by its ID",
   args: {
-    id: { type: GraphQLInt },
+    id: { type: new GraphQLNonNull(GraphQLInt) },
   },
   async resolve(parent, args) {
     let result = await Authors.getAuthorId(args.id);
@@ -94,7 +73,6 @@ const deleteAuthor = {
 };
 
 module.exports = {
-  AuthorType,
   getAuthors,
   getAuthorId,
   createAuthor,

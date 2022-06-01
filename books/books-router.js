@@ -1,4 +1,3 @@
-const expressGraphQL = require("express-graphql").graphqlHTTP;
 const {
   GraphQLObjectType,
   GraphQLString,
@@ -9,11 +8,10 @@ const {
 
 const Books = require("./books-helpers");
 const Authors = require("../authors/authors-helpers");
-const AuthorType = require("../authors/authors-routers");
 
 //book schema for book list
 const BookType = new GraphQLObjectType({
-  name: "Book",
+  name: "Books",
   description: "Get a list of books",
   fields: () => ({
     id: { type: GraphQLInt },
@@ -23,7 +21,24 @@ const BookType = new GraphQLObjectType({
       type: AuthorType,
       resolve: async (book) => {
         let authors = await Authors.getAuthors();
-        return authors.filter((author) => book.author_id === author.id);
+        return authors.find((author) => author.id === book.author_id);
+      },
+    },
+  }),
+});
+
+//author schema for author list, will export to authors router
+const AuthorType = new GraphQLObjectType({
+  name: "Author",
+  description: "This represents an author of a book",
+  fields: () => ({
+    id: { type: GraphQLInt },
+    name: { type: new GraphQLNonNull(GraphQLString) },
+    books: {
+      type: new GraphQLList(BookType),
+      resolve: async (author) => {
+        let result = await Books.getBooks();
+        return result.filter((book) => book.author_id === author.id);
       },
     },
   }),
@@ -42,7 +57,7 @@ const getBooks = {
 const getBookId = {
   type: BookType,
   description: "get book by id",
-  args: { id: { type: GraphQLInt } },
+  args: { id: { type: new GraphQLNonNull(GraphQLInt) } },
   resolve: async (parent, args) => {
     let result = await Books.getBooksById(args.id);
     if (!result) throw new Error(`no id of ${args.id} found`);
@@ -56,7 +71,7 @@ const addBook = {
   description: "add a new book",
   args: {
     name: { type: new GraphQLNonNull(GraphQLString) },
-    author_id: { type: GraphQLInt },
+    author_id: { type: new GraphQLNonNull(GraphQLInt) },
   },
   resolve: (parent, args) => {
     return Books.addBook({
@@ -71,9 +86,9 @@ const updateBooks = {
   type: BookType,
   description: "update book by Id",
   args: {
-    id: { type: GraphQLInt },
+    id: { type: new GraphQLNonNull(GraphQLInt) },
     name: { type: new GraphQLNonNull(GraphQLString) },
-    author_id: { type: GraphQLInt },
+    author_id: { type: new GraphQLNonNull(GraphQLInt) },
   },
   resolve: (parent, args) => {
     return Books.updateBook(
@@ -87,7 +102,7 @@ const updateBooks = {
 const deleteBook = {
   type: BookType,
   description: "delete a book",
-  args: { id: { type: GraphQLInt } },
+  args: { id: { type: new GraphQLNonNull(GraphQLInt) } },
   resolve: (parent, args) => {
     return Books.deleteBook(args.id);
   },
@@ -95,6 +110,7 @@ const deleteBook = {
 
 module.exports = {
   BookType,
+  AuthorType,
   getBooks,
   getBookId,
   addBook,
