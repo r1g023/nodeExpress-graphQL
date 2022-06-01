@@ -20,7 +20,9 @@ const {
   deleteBook,
 } = require("../books/books-router");
 
-//manipulate Authors and books DB through root query
+const { getUsers, getUserById } = require("../users/users-router");
+
+//manipulate Authors, books, and users DB through root query
 const RootQueryType = new GraphQLObjectType({
   name: "Query",
   description: "Root Query to get list of authors and books",
@@ -29,10 +31,13 @@ const RootQueryType = new GraphQLObjectType({
     // <--------- list of authors ----->
     getAuthors,
     getAuthorId,
-    // getAuthorBooks,
+
     // <--------- List of books ------>
     getBooks,
     getBookId,
+    // <--------- List of Users ------>
+    getUsers,
+    getUserById,
   }),
 });
 
