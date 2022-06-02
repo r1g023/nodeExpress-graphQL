@@ -36,7 +36,7 @@ function restrictedUser() {
         }
       });
     } else {
-      res.json({
+      res.status(403).json({
         token_error:
           "please verify credentials and login or register on /graphql/auth endpoint",
       });
