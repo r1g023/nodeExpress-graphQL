@@ -7,13 +7,15 @@ const {
 
 const Authors = require("./authors-helpers");
 const { AuthorType } = require("../books/books-router");
+const { restrictedUser, checkRole } = require("../auth/auth-middleware");
 
 //get list of authors
 const getAuthors = {
   type: new GraphQLList(AuthorType),
   description: "List of Authors..",
-  resolve: (parent, args) => {
-    return Authors.getAuthors();
+  args: {},
+  resolve: (parent, args, { restrictedUser }) => {
+    if (restrictedUser) return Authors.getAuthors();
   },
 };
 

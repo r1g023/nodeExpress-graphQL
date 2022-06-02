@@ -98,7 +98,7 @@ const updateBooks = {
   },
 };
 
-//delete book by ID
+//delete book by ID.
 const deleteBook = {
   type: BookType,
   description: "delete a book",

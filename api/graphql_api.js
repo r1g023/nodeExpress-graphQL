@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const expressGraphQL = require("express-graphql").graphqlHTTP;
 const { GraphQLSchema, GraphQLObjectType } = require("graphql");
+const { restrictedUser, checkRole } = require("../auth/auth-middleware");
 //Authors database
 const {
   getAuthors,
@@ -20,7 +21,10 @@ const {
   deleteBook,
 } = require("../books/books-router");
 
-//manipulate Authors and books DB through root query
+const { getUsers, getUserById } = require("../users/users-router");
+const { registerUser, loginUser } = require("../auth/auth-router");
+
+//manipulate Authors, books, and users DB through root query
 const RootQueryType = new GraphQLObjectType({
   name: "Query",
   description: "Root Query to get list of authors and books",
@@ -29,10 +33,13 @@ const RootQueryType = new GraphQLObjectType({
     // <--------- list of authors ----->
     getAuthors,
     getAuthorId,
-    // getAuthorBooks,
+
     // <--------- List of books ------>
     getBooks,
     getBookId,
+    // <--------- List of Users ------>
+    getUsers,
+    getUserById,
   }),
 });
 
@@ -47,8 +54,18 @@ const RootMutationType = new GraphQLObjectType({
     addBook,
     updateBooks,
     deleteBook,
+    // <--------- Mutations for User ------->
+    registerUser,
+    loginUser,
   }),
 });
+
+var root = {
+  decodedToken: function (args, req) {
+    console.log("decoded--->", req.decodedToken);
+    return req.decodedToken;
+  },
+};
 
 const schema = new GraphQLSchema({
   //getting of data
@@ -57,6 +74,10 @@ const schema = new GraphQLSchema({
   mutation: RootMutationType,
 });
 
-router.use("/", expressGraphQL({ schema: schema, graphiql: true }));
+// router.use(restrictedUser(), checkRole());
+router.use(
+  "/",
+  expressGraphQL({ schema: schema, rootValue: root, graphiql: true })
+);
 
 module.exports = router;
