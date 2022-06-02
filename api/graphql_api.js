@@ -60,6 +60,13 @@ const RootMutationType = new GraphQLObjectType({
   }),
 });
 
+var root = {
+  decodedToken: function (args, req) {
+    console.log("decoded--->", req.decodedToken);
+    return req.decodedToken;
+  },
+};
+
 const schema = new GraphQLSchema({
   //getting of data
   query: RootQueryType,
@@ -67,10 +74,10 @@ const schema = new GraphQLSchema({
   mutation: RootMutationType,
 });
 
+// router.use(restrictedUser(), checkRole());
 router.use(
   "/",
-
-  expressGraphQL({ schema: schema, graphiql: true })
+  expressGraphQL({ schema: schema, rootValue: root, graphiql: true })
 );
 
 module.exports = router;

@@ -13,8 +13,9 @@ const { restrictedUser, checkRole } = require("../auth/auth-middleware");
 const getAuthors = {
   type: new GraphQLList(AuthorType),
   description: "List of Authors..",
-  resolve: (parent, args) => {
-    return Authors.getAuthors();
+  args: {},
+  resolve: (parent, args, { restrictedUser }) => {
+    if (restrictedUser) return Authors.getAuthors();
   },
 };
 
