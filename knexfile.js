@@ -4,7 +4,7 @@ const pg = require("pg");
 if (process.env.DATABASE_URL) {
   pg.defaults.ssl = { rejectUnauthorized: false };
 }
-//security reason are we going to reject people that are not authorized? No..
+// security reason are we going to reject people that are not authorized? No..
 const sharedConfig = {
   client: "pg",
   migrations: { directory: "./database/migrations" },
