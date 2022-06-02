@@ -7,15 +7,13 @@ const {
 
 const Authors = require("./authors-helpers");
 const { AuthorType } = require("../books/books-router");
-const { restrictedUser, checkRole } = require("../auth/auth-middleware");
 
 //get list of authors
 const getAuthors = {
   type: new GraphQLList(AuthorType),
   description: "List of Authors..",
-  args: {},
-  resolve: (parent, args, { restrictedUser }) => {
-    if (restrictedUser) return Authors.getAuthors();
+  resolve: (parent, args) => {
+    return Authors.getAuthors();
   },
 };
 
@@ -24,7 +22,7 @@ const getAuthorId = {
   type: AuthorType,
   description: "Get Author By ID",
   args: { id: { type: new GraphQLNonNull(GraphQLInt) } },
-  resolve: async (parent, args) => {
+  resolve: async (parent, args, { restrictedUser }) => {
     let result = await Authors.getAuthorId(args.id);
     if (!result) throw new Error(`no id of ${args.id} found`);
     return result;

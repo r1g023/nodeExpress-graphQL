@@ -22,7 +22,6 @@ const {
 } = require("../books/books-router");
 
 const { getUsers, getUserById } = require("../users/users-router");
-const { registerUser, loginUser } = require("../auth/auth-router");
 
 //manipulate Authors, books, and users DB through root query
 const RootQueryType = new GraphQLObjectType({
@@ -33,7 +32,6 @@ const RootQueryType = new GraphQLObjectType({
     // <--------- list of authors ----->
     getAuthors,
     getAuthorId,
-
     // <--------- List of books ------>
     getBooks,
     getBookId,
@@ -54,18 +52,8 @@ const RootMutationType = new GraphQLObjectType({
     addBook,
     updateBooks,
     deleteBook,
-    // <--------- Mutations for User ------->
-    registerUser,
-    loginUser,
   }),
 });
-
-var root = {
-  decodedToken: function (args, req) {
-    console.log("decoded--->", req.decodedToken);
-    return req.decodedToken;
-  },
-};
 
 const schema = new GraphQLSchema({
   //getting of data
@@ -75,9 +63,6 @@ const schema = new GraphQLSchema({
 });
 
 // router.use(restrictedUser(), checkRole());
-router.use(
-  "/",
-  expressGraphQL({ schema: schema, rootValue: root, graphiql: true })
-);
+router.use("/", expressGraphQL({ schema: schema, graphiql: true }));
 
 module.exports = router;
