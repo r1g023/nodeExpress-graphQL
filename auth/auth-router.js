@@ -33,23 +33,19 @@ const registerUser = {
 //login as registered user and get the token
 const loginUser = {
   type: UserType,
-  description: "register as new user",
+  description: "login as user",
   args: {
     username: { type: new GraphQLNonNull(GraphQLString) },
     password: { type: new GraphQLNonNull(GraphQLString) },
   },
   resolve: async (parent, args) => {
-    console.log("args--->", args);
-
     try {
       let user = await User.loginUser({ username: args.username });
       let valid = bcrypt.compareSync(args.password, user.password);
-      if (!valid) throw new Error("check your password");
+      if (!valid) throw new Error("check your password or username");
 
       if (user && bcrypt.compareSync(args.password, user.password)) {
         return user;
-      } else {
-        throw new Error(`check credentials`);
       }
     } catch (error) {
       throw new Error(error);

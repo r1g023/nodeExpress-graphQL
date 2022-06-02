@@ -36,14 +36,17 @@ function restrictedUser() {
         }
       });
     } else {
-      res.json({ error: "token does not exist, please enter one" });
+      res.json({
+        token_error:
+          "please verify credentials and login or register on /graphql/auth endpoint",
+      });
     }
   };
 }
 
 function checkRole(user) {
   return (req, res, next) => {
-    if (req.decodedToken.role === "admin") {
+    if (req.decodedToken.role === user) {
       next();
     } else {
       res

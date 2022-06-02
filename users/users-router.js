@@ -13,7 +13,7 @@ const { generateToken } = require("../auth/auth-middleware");
 const UserType = new GraphQLObjectType({
   name: "Users",
   description: "Schema for registered users",
-  fields: () => ({
+  fields: (req, res) => ({
     id: { type: GraphQLInt },
     email: { type: new GraphQLNonNull(GraphQLString) },
     username: { type: new GraphQLNonNull(GraphQLString) },
