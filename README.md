@@ -48,10 +48,10 @@ _GET_ https://node-express-graphql-api.herokuapp.com/graphql/auth
 
 | Query | Mutations |
 |-------|-----------|
-getAuthors: [Author] | createAuthor: Author | deleteAuthor: Author | updateAuthorId: Author |
+getAuthors: [Author] | createAuthor: Author |  
 List of Authors..
-|------------------------------|------------------------------|------------------------------|
-getAuthorId(id: Int!): [Author] |
+                     | deleteAuthor: Author |
+getAuthorId(id: Int!): [Author] | updateAuthorId: Author |
 Get Author By ID
 
 getBooks: [Books] | addBook: Books | deleteBook: Books | updateBooks: Books |
@@ -60,9 +60,7 @@ list of books by author
 getBookId(id: Int!): Books
 get book by id
 |------------------------------|
-getUsers: [Users] | registerUser: Users | loginUser: Users |
-get list of registered users..
-|------------------------------|
+getUsers: [Users] | registerUser: Users |
+get list of registered users.. | loginUser: Users |
 getUserById(id: Int!): Users
 get user by its ID
-|------------------------------|
