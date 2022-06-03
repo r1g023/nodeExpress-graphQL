@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const expressGraphQL = require("express-graphql").graphqlHTTP;
 const { GraphQLSchema, GraphQLObjectType } = require("graphql");
-const { restrictedUser, checkRole } = require("../auth/auth-middleware");
+
 //Authors database
 const {
   getAuthors,
