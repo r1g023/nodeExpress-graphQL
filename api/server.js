@@ -15,7 +15,7 @@ server.use("/", welcomeRouter);
 server.use("/graphql/auth", graphql_auth);
 server.use("/graphql", restrictedUser(), checkRole("admin"), graphql_api);
 
-// middleware for CATCH ERROR on all endpoints of /api/messages if REST only
+// middleware for CATCH ERROR
 server.use((err, req, res, next) => {
   console.log(err);
   res.status(500).json({
