@@ -47,16 +47,16 @@ _GET_ https://node-express-graphql-api.herokuapp.com/graphql/auth
 ```
 
 | Query | Mutations |
-|-------|-----------|
+|-------|
 getAuthors: [Author] | 
-|-------|-----------|                     
+|-------|                     
 getAuthorId(id: Int!): [Author] |
-|-------|-----------|
+|-------|
 getBooks: [Books] | 
-|-------|-----------|
+|-------|
 getBookId(id: Int!): Books |
-|-------|-----------|
+|-------|
 getUsers: [Users] | registerUser: [Users] |
-|-------|-----------|
+|-------|
 getUserById(id: Int!): [Users] |
-|-------|-----------|
+|-------|
