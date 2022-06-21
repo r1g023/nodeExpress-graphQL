@@ -5,17 +5,30 @@ exports.seed = function (knex) {
   return knex("users").insert([
     {
       id: 1,
-      email: faker.internet.email(),
-      username: faker.name.findName(),
+      email: "test1@email.com",
+      username: "user1",
       password: bcrypt.hashSync("test1", 10),
       role: "admin",
+      avatar: faker.image.avatar(),
+      dark_mode: false,
     },
     {
       id: 2,
-      email: faker.internet.email(),
-      username: faker.name.findName(),
+      email: "test2@email.com",
+      username: "user2",
       password: bcrypt.hashSync("test2", 10),
-      role: "user",
+      role: "admin",
+      avatar: faker.image.avatar(),
+      dark_mode: false,
+    },
+    {
+      id: 3,
+      email: "test3@email.com",
+      username: "user3",
+      password: bcrypt.hashSync("test3", 10),
+      role: "admin",
+      avatar: faker.image.avatar(),
+      dark_mode: false,
     },
   ]);
 };

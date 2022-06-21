@@ -5,6 +5,9 @@ exports.up = function (knex) {
     tbl.string("username", 128).notNull().unique();
     tbl.string("password", 128).notNull().unique();
     tbl.string("role", 128).notNull();
+    tbl.string("avatar", 256).nullable().defaultTo(null);
+    tbl.boolean("dark_mode").defaultTo(false);
+    tbl.timestamps(true, true);
   });
 };
 
