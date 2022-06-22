@@ -9,6 +9,7 @@ exports.up = function (knex) {
         tbl.string("content", 256).notNull();
         tbl.string("method", 256).notNull();
         tbl.boolean("completed").defaultTo(false);
+        tbl.timestamps(true, true);
         tbl
           .integer("user_id")
           .unsigned()
@@ -21,6 +22,7 @@ exports.up = function (knex) {
       .createTable("comments", (tbl) => {
         tbl.increments("id");
         tbl.string("comment", 256).notNull();
+        tbl.timestamps(true, true);
         tbl
           .integer("post_id")
           .unsigned()

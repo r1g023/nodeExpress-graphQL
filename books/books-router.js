@@ -8,7 +8,6 @@ const {
 
 const Books = require("./books-helpers");
 const Authors = require("../authors/authors-helpers");
-const { UserType } = require("../users/users-router");
 
 //book schema for book list
 const BookType = new GraphQLObjectType({

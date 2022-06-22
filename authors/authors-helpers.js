@@ -9,7 +9,7 @@ module.exports = {
 };
 
 //get list of authors
-function getAuthors(authorId) {
+function getAuthors() {
   return db("authors").select("*").orderBy("id");
 }
 

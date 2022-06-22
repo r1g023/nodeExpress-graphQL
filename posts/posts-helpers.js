@@ -1,6 +1,7 @@
 const db = require("../database/dbConfig");
 module.exports = {
   getPosts,
+  getPostById,
   addPost,
   updatePost,
   deletePost,
@@ -9,6 +10,11 @@ module.exports = {
 //get list of authors
 function getPosts() {
   return db("posts").select("*").orderBy("id");
+}
+
+//get post by id from db
+function getPostById(id) {
+  return db("posts").where({ id }).first();
 }
 
 // add a new post to the database

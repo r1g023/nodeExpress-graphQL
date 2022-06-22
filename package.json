@@ -21,7 +21,7 @@
     "npm": "8.5.1"
   },
   "repository": {
-    "type": "module",
+    "type": "git",
     "url": "git+https://github.com/rigo0523/nodeExpress-graphQL.git"
   },
   "keywords": [],
@@ -38,6 +38,7 @@
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-graphql": "^0.12.0",
+    "express-graphql-header": "^1.0.1",
     "faker": "^5.5.3",
     "graphql": "^16.5.0",
     "helmet": "^5.1.0",
@@ -47,7 +48,7 @@
     "pg": "^8.7.3"
   },
   "devDependencies": {
-    "@faker-js/faker": "^7.3.0",
+    "altair-express-middleware": "^4.5.0",
     "eslint": "^8.18.0",
     "nodemon": "^2.0.16"
   }

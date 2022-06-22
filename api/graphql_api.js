@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const expressGraphQL = require("express-graphql").graphqlHTTP;
+const { altairExpress } = require("altair-express-middleware");
+
 const { GraphQLSchema, GraphQLObjectType } = require("graphql");
 
 //Authors database
@@ -20,8 +22,24 @@ const {
   updateBooks,
   deleteBook,
 } = require("../books/books-router");
-
+// users database
 const { getUsers, getUserById } = require("../users/users-router");
+// posts database
+const {
+  getPosts,
+  getPostId,
+  createPost,
+  updatePost,
+  deletePost,
+} = require("../posts/posts-router");
+// comments database
+const {
+  getComments,
+  getCommentId,
+  addComment,
+  updateComment,
+  deleteComment,
+} = require("../comments/comments-router");
 
 //manipulate Authors, books, and users DB through root query
 const RootQueryType = new GraphQLObjectType({
@@ -38,6 +56,12 @@ const RootQueryType = new GraphQLObjectType({
     // <--------- List of Users ------>
     getUsers,
     getUserById,
+    // <--------- List of Posts ------>
+    getPosts,
+    getPostId,
+    // <--------- List of Comments ------>
+    getComments,
+    getCommentId,
   }),
 });
 
@@ -52,6 +76,14 @@ const RootMutationType = new GraphQLObjectType({
     addBook,
     updateBooks,
     deleteBook,
+    // <--------- Mutations for Posts ------->
+    createPost,
+    updatePost,
+    deletePost,
+    // <--------- Mutations for Comments ------->
+    addComment,
+    updateComment,
+    deleteComment,
   }),
 });
 

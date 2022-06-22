@@ -2,6 +2,7 @@
 const db = require("../database/dbConfig");
 module.exports = {
   getComments,
+  getCommentById,
   addComment,
   updateComment,
   deleteComment,
@@ -20,6 +21,11 @@ async function addComment(data) {
     "post_id",
   ]);
   return newComment;
+}
+
+// get comment by ID
+function getCommentById(id) {
+  return db("comments").where({ id }).first();
 }
 
 // update a comment

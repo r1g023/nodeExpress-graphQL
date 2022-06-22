@@ -22,7 +22,7 @@ const getAuthorId = {
   type: AuthorType,
   description: "Get Author By ID",
   args: { id: { type: new GraphQLNonNull(GraphQLInt) } },
-  resolve: async (parent, args, { restrictedUser }) => {
+  resolve: async (parent, args) => {
     let result = await Authors.getAuthorId(args.id);
     if (!result) throw new Error(`no id of ${args.id} found`);
     return result;
