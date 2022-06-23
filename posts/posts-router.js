@@ -82,7 +82,7 @@ const createPost = {
     };
     let users = await Users.getUsers();
     let result = users.find((user) => user.id === args.user_id);
-    if (!result) throw new Error(`user ID # ${args.id} doesn't exist`);
+    if (!result) throw new Error(`user ID # ${args.user_id} doesn't exist`);
 
     let posts = await Posts.addPost(newPost);
     return posts;

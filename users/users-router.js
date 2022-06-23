@@ -89,6 +89,7 @@ const updateUser = {
     last_name: { type: GraphQLString },
     dob: { type: GraphQLString },
     email: { type: GraphQLString },
+    role: { type: GraphQLString },
     avatar: { type: GraphQLString },
     dark_mode: { type: GraphQLBoolean },
   },
@@ -98,6 +99,7 @@ const updateUser = {
       last_name: args.last_name,
       dob: args.dob,
       email: args.email,
+      role: args.role,
       avatar: args.avatar,
       dark_mode: args.dark_mode,
     };

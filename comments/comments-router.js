@@ -39,7 +39,7 @@ const getCommentId = {
   resolve: async (parent, args) => {
     let comment = await Comments.getCommentById(args.id);
     if (!comment)
-      throw new Error(`Comment ID ${args.id} not found in comments`);
+      throw new Error(`Comment ID ${args.id} does not exist in the database`);
     return comment;
   },
 };
@@ -58,7 +58,7 @@ const addComment = {
     let post = await Posts.getPosts();
     let result = post.find((post) => post.id === args.post_id);
     if (!result)
-      throw new Error(`user ID: ${args.post_id} NOT found on post list`);
+      throw new Error(`user ID: ${args.post_id} does not exist in users `);
     let comment = await Comments.addComment(args);
     return comment;
   },
@@ -82,7 +82,7 @@ const updateCommentID = {
     };
     let comment = await Comments.updateCommentById(commentArg, args.id);
     if (!comment)
-      throw new Error(`Comment ID ${args.id} not found in comments`);
+      throw new Error(`Comment ID ${args.id} does not exist in the database`);
     return comment;
   },
 };
@@ -97,7 +97,7 @@ const deleteCommentID = {
   resolve: (parent, args) => {
     let comment = Comments.getCommentById(args.id);
     if (!comment)
-      throw new Error(`Comment ID ${args.id} not found in comments`);
+      throw new Error(`Comment ID ${args.id} does not exist in the database`);
     return Comments.deleteCommentById(args.id);
   },
 };
