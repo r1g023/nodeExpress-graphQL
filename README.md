@@ -65,7 +65,7 @@ _POST_ https://node-express-graphql-api.herokuapp.com/graphql/auth
 
 
 ### Authors and Books data with user authentication
-| Query | Mutations |
+| Queries | Mutations |
 |-------|-----------|
 | getAuthors: [Author] | createAuthor(name: String!): Author **__\|__** deleteAuthor(id: Int!): Author |                 
 | getAuthorId(id: Int!): Author | updateAuthorId(id: Int!name: String!): Author |
