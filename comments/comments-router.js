@@ -94,10 +94,11 @@ const deleteCommentID = {
   args: {
     id: { type: new GraphQLNonNull(GraphQLInt) },
   },
-  resolve: (parent, args) => {
-    let comment = Comments.getCommentById(args.id);
-    if (!comment)
+  resolve: async (parent, args) => {
+    let commentID = await Comments.getCommentById(args.id);
+    if (!commentID)
       throw new Error(`Comment ID ${args.id} does not exist in the database`);
+
     return Comments.deleteCommentById(args.id);
   },
 };

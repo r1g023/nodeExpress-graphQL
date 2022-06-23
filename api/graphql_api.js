@@ -70,7 +70,6 @@ const RootQueryType = new GraphQLObjectType({
     // <--------- List of Comments ------>
     getComments,
     getCommentId,
-    deleteCommentID,
   }),
 });
 
@@ -92,6 +91,7 @@ const RootMutationType = new GraphQLObjectType({
     // <--------- Mutations for Comments ------->
     addComment,
     updateCommentID,
+    deleteCommentID,
     // <--------- Mutations for Users ------->
     updateUser,
     deleteUserID,

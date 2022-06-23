@@ -39,6 +39,10 @@ function updateCommentById(data, id) {
 }
 
 // delete a comment
-function deleteCommentById(id) {
-  return db("comments").where({ id }).del();
+async function deleteCommentById(id) {
+  //return id and title after delete
+  const [deletedComment] = await db("comments")
+    .del(["id", "comment", "liked", "post_id"])
+    .where({ id });
+  return deletedComment;
 }
