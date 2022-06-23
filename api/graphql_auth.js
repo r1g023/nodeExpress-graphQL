@@ -31,6 +31,7 @@ const schema = new GraphQLSchema({
 });
 
 // router.use(restrictedUser(), checkRole());
+
 router.use("/", expressGraphQL({ schema: schema, graphiql: true }));
 
 module.exports = router;
