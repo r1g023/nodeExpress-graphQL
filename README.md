@@ -29,7 +29,7 @@ _POST_ https://node-express-graphql-api.herokuapp.com/graphql/auth
 _LOGIN_
 _POST_ https://node-express-graphql-api.herokuapp.com/graphql/auth
 
-1) you will login as user after registering for the first time
+1) you will login as user after registering for the first time.
 2) Once logged in, you will receive a token, use this token on client request headers, specifically authorization to get access to the graphql endpoint. 
 3) I recommend using the chrome ModHeader extension to add the token to the request headers or use your own GraphQL client.
 4) [ModHeader](https://chrome.google.com/webstore/detail/modheader/idgpnmonknjnojddfkpgkljpfnnfcklj?hl=en)
