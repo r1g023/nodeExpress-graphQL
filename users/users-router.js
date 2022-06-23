@@ -4,7 +4,6 @@ const {
   GraphQLList,
   GraphQLInt,
   GraphQLNonNull,
-  //boolean type
   GraphQLBoolean,
 } = require("graphql");
 
@@ -31,7 +30,7 @@ const UserType = new GraphQLObjectType({
     token: {
       type: GraphQLString,
       description: "a token",
-      resolve: (parent, args) => {
+      resolve: async (parent, args) => {
         console.log("token parent---->", parent);
         return generateToken(parent);
       },

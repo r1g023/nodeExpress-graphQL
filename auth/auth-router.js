@@ -1,4 +1,4 @@
-const { GraphQLString, GraphQLNonNull, GraphQLBoolean } = require("graphql");
+const { GraphQLString, GraphQLNonNull } = require("graphql");
 const bcrypt = require("bcryptjs");
 
 const User = require("../users/users-helpers");
@@ -9,21 +9,25 @@ const registerUser = {
   type: UserType,
   description: "register as new user",
   args: {
+    first_name: { type: GraphQLString },
+    last_name: { type: GraphQLString },
+    dob: { type: GraphQLString },
     email: { type: new GraphQLNonNull(GraphQLString) },
     username: { type: new GraphQLNonNull(GraphQLString) },
     password: { type: new GraphQLNonNull(GraphQLString) },
     role: { type: new GraphQLNonNull(GraphQLString) },
     avatar: { type: GraphQLString },
-    dark_mode: { type: GraphQLBoolean },
   },
   resolve: async (parent, args) => {
     const credentials = {
+      first_name: args.first_name,
+      last_name: args.last_name,
+      dob: args.dob,
       email: args.email,
       username: args.username,
       password: bcrypt.hashSync(args.password, 10),
       role: args.role,
       avatar: args.avatar,
-      dark_mode: args.dark_mode,
     };
     try {
       let newUser = await User.registerUser(credentials);

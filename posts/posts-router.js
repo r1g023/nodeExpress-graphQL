@@ -9,7 +9,6 @@ const {
 
 const Posts = require("./posts-helpers");
 const Comments = require("../comments/comments-helpers");
-//import Users from "../users/users-helpers";
 const Users = require("../users/users-helpers");
 const { CommentType } = require("../comments/comments-router");
 
@@ -83,7 +82,7 @@ const createPost = {
     };
     let users = await Users.getUsers();
     let result = users.find((user) => user.id === args.user_id);
-    if (!result) throw new Error(`no id of ${args.user_id} found on user list`);
+    if (!result) throw new Error(`user ID # ${args.id} doesn't exist`);
 
     let posts = await Posts.addPost(newPost);
     return posts;
@@ -107,7 +106,7 @@ const updatePost = {
       image: args.image,
     };
     let postById = await Posts.getPostById(args.id);
-    if (!postById) throw new Error(`no id of ${args.id} found`);
+    if (!postById) throw new Error(`post ID # ${args.id} does not exist`);
     return Posts.updatePost(post, args.id);
   },
 };
@@ -119,7 +118,9 @@ const deletePost = {
   args: {
     id: { type: new GraphQLNonNull(GraphQLInt) },
   },
-  resolve: (parent, args) => {
+  resolve: async (parent, args) => {
+    let postById = await Posts.getPostById(args.id);
+    if (!postById) throw new Error(`post ID # ${args.id} does not exist`);
     return Posts.deletePost(args.id);
   },
 };

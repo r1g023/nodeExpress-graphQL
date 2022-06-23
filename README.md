@@ -31,8 +31,8 @@ _GET_ https://node-express-graphql-api.herokuapp.com/graphql/auth
 
 1) you will login as user after registering for the first time
 2) Once logged in, you will receive a token, use this token on client request headers, specifically authorization to get access to the graphql endpoint. 
-3) I recommend using ModHeader to enter your token in the header.
- 1) https://chrome.google.com/webstore/detail/modheader/idgpnmonknjnojddfkpgkljpfnnfcklj?hl=en
+3) I recommend using the chrome ModHeader extension to add the token to the request headers or use your own GraphQL client.
+4) [ModHeader](https://chrome.google.com/webstore/detail/modheader/idgpnmonknjnojddfkpgkljpfnnfcklj?hl=en)
    
  ```javascript
            mutation login {
@@ -46,12 +46,32 @@ _GET_ https://node-express-graphql-api.herokuapp.com/graphql/auth
             }
 ```
 
+# User Registration and Login
+| Mutations |
+|----------|
+| registerUser: Users |
+| loginUser(username: String!password: String!): Users |
+
+
+## Users/Posts/Comments queries and mutations with user authentication
+| Queries | Mutations |
+|---------| -----------|
+| getUsers: [Users] | updateUser: Users |
+| getUserById: Users | deleteUser: Users |
+| getPosts: [Posts] | createPost: Posts  |
+| getPostId: Posts | updatePost: Posts   **__\|__** deletePost: Posts |
+| getComments: [Comments] | addComment: Comments |
+| getCommentId: Comments | updateCommentID: Comments |
+
+
+### Authors and Books data
 | Query | Mutations |
 |-------|-----------|
 | getAuthors: [Author] | createAuthor(name: String!): Author **__\|__** deleteAuthor(id: Int!): Author |                 
 | getAuthorId(id: Int!): Author | updateAuthorId(id: Int!name: String!): Author |
 | getBooks: [Books] | addBook(name: String!author_id: Int!): Books **__\|__** deleteBook(id: Int!): Books |
 | getBookId(id: Int!): Books | updateBooks( id: Int! name: String! author_id: Int! ): Books |
-| getUsers: [Users] | registerUser: Users |
-| getUserById(id: Int!): Users | loginUser(username: String!password: String!): Users |
+
+
+
 

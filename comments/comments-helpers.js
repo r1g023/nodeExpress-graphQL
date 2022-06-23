@@ -34,7 +34,6 @@ function updateCommentById(data, id) {
     .update(data)
     .where("id", id)
     .then((ids) => {
-      console.log("ids---update----->", ids);
       return db("comments").where({ id: id }).first();
     });
 }
