@@ -59,7 +59,7 @@ _POST_ https://node-express-graphql-api.herokuapp.com/graphql/auth
 | getUsers: [Users] | updateUser: Users |
 | getUserById: Users | deleteUser: Users |
 | getPosts: [Posts] | createPost: Posts  |
-| getPostId: Posts | updatePost: Posts   **__\|__** **__\|__** **__\|__**  deletePost: Posts |
+| getPostId: Posts | updatePost: Posts   **__\|__** **__\|__** deletePost: Posts |
 | getComments: [Comments] | addComment: Comments |
 | getCommentId: Comments | updateCommentID: Comments |
 
@@ -67,9 +67,9 @@ _POST_ https://node-express-graphql-api.herokuapp.com/graphql/auth
 ### Authors and Books data with user authentication
 | Queries | Mutations |
 |-------|-----------|
-| getAuthors: [Author] | createAuthor(name: String!): Author **__\|__** deleteAuthor(id: Int!): Author |                 
+| getAuthors: [Author] | createAuthor(name: String!): Author **__\|__** **__\|__** deleteAuthor(id: Int!): Author |                 
 | getAuthorId(id: Int!): Author | updateAuthorId(id: Int!name: String!): Author |
-| getBooks: [Books] | addBook(name: String!author_id: Int!): Books **__\|__** deleteBook(id: Int!): Books |
+| getBooks: [Books] | addBook(name: String!author_id: Int!): Books **__\|__** **__\|__** deleteBook(id: Int!): Books |
 | getBookId(id: Int!): Books | updateBooks( id: Int! name: String! author_id: Int! ): Books |
 
 
