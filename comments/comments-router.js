@@ -4,17 +4,20 @@ const {
   GraphQLInt,
   GraphQLNonNull,
   GraphQLObjectType,
+  GraphQLBoolean,
 } = require("graphql");
 
 const Comments = require("./comments-helpers");
+const Posts = require("../posts/posts-helpers");
 
 // create comment type
 const CommentType = new GraphQLObjectType({
   name: "Comments",
   description: "Get a list of comments",
   fields: () => ({
-    id: { type: new GraphQLNonNull(GraphQLInt) },
+    id: { type: GraphQLInt },
     comment: { type: GraphQLString },
+    liked: { type: GraphQLBoolean },
     post_id: { type: GraphQLInt },
   }),
 });
@@ -33,8 +36,11 @@ const getCommentId = {
   type: CommentType,
   description: "get comment by id",
   args: { id: { type: new GraphQLNonNull(GraphQLInt) } },
-  resolve: (parent, args) => {
-    return Comments.getCommentById(args.id);
+  resolve: async (parent, args) => {
+    let comment = await Comments.getCommentById(args.id);
+    if (!comment)
+      throw new Error(`Comment ID ${args.id} not found in comments`);
+    return comment;
   },
 };
 
@@ -43,46 +49,56 @@ const addComment = {
   type: CommentType,
   description: "add a new comment",
   args: {
+    id: { type: GraphQLInt },
     comment: { type: new GraphQLNonNull(GraphQLString) },
     post_id: { type: new GraphQLNonNull(GraphQLInt) },
   },
-  resolve: (parent, args) => {
-    return Comments.addComment(args);
+  resolve: async (parent, args) => {
+    console.log("args---->", args);
+    let post = await Posts.getPosts();
+    let result = post.find((post) => post.id === args.post_id);
+    if (!result)
+      throw new Error(`user ID: ${args.post_id} NOT found on post list`);
+    let comment = await Comments.addComment(args);
+    return comment;
   },
 };
 
-// update comment by Id
-const updateComment = {
+// update a comment
+const updateCommentID = {
   type: CommentType,
-  description: "update comment by id",
+  description: "update a comment",
   args: {
     id: { type: new GraphQLNonNull(GraphQLInt) },
-    comment: { type: GraphQLString },
+    comment: { type: new GraphQLNonNull(GraphQLString) },
+    liked: { type: GraphQLBoolean },
     post_id: { type: GraphQLInt },
   },
   resolve: async (parent, args) => {
-    //get comments by id async
-    // let comment = await Comments.getCommentById(args.id);
-    // if (!comment) throw new Error(`no id of ${args.id} found`);
-    return Comments.updateComment(
-      { comments: args.comment, post_id: args.post_id },
-      args.id
-    );
+    let commentArg = {
+      comment: args.comment,
+      liked: args.liked,
+      post_id: args.post_id,
+    };
+    let comment = await Comments.updateCommentById(commentArg, args.id);
+    if (!comment)
+      throw new Error(`Comment ID ${args.id} not found in comments`);
+    return comment;
   },
 };
 
-// delete comment by Id
-const deleteComment = {
+// delete a comment by its ID
+const deleteCommentID = {
   type: CommentType,
-  description: "delete comment by id",
+  description: "delete a comment",
   args: {
     id: { type: new GraphQLNonNull(GraphQLInt) },
   },
-  resolve: async (parent, args) => {
-    //get comments by id async
-    // let comment = await Comments.getCommentById(args.id);
-    // if (!comment) throw new Error(`no id of ${args.id} found`);
-    return Comments.deleteComment(args.id);
+  resolve: (parent, args) => {
+    let comment = Comments.getCommentById(args.id);
+    if (!comment)
+      throw new Error(`Comment ID ${args.id} not found in comments`);
+    return Comments.deleteCommentById(args.id);
   },
 };
 
@@ -91,6 +107,6 @@ module.exports = {
   getComments,
   getCommentId,
   addComment,
-  updateComment,
-  deleteComment,
+  updateCommentID,
+  deleteCommentID,
 };

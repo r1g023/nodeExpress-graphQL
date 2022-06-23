@@ -43,6 +43,7 @@ const loginUser = {
     password: { type: new GraphQLNonNull(GraphQLString) },
   },
   resolve: async (parent, args) => {
+    console.log("args password----->", args.password);
     try {
       let user = await User.loginUser({ username: args.username });
       let valid = bcrypt.compareSync(args.password, user.password);

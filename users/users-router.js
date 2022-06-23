@@ -21,6 +21,9 @@ const UserType = new GraphQLObjectType({
   description: "Schema for registered users",
   fields: (req, res) => ({
     id: { type: GraphQLInt },
+    first_name: { type: GraphQLString },
+    last_name: { type: GraphQLString },
+    dob: { type: GraphQLString },
     email: { type: new GraphQLNonNull(GraphQLString) },
     username: { type: new GraphQLNonNull(GraphQLString) },
     password: { type: new GraphQLNonNull(GraphQLString) },
@@ -65,16 +68,59 @@ const getUsers = {
   },
 };
 
-//const get users by ID
+// get users by ID
 const getUserById = {
   type: UserType,
   description: "get user by its ID",
   args: { id: { type: new GraphQLNonNull(GraphQLInt) } },
   resolve: async (parent, args) => {
     let users = await Users.getById(args.id);
-    if (!users) throw new Error(`cant find user by id of ${args.id}`);
+    if (!users) throw new Error(`user ID # ${args.id} does not exist`);
     return users;
   },
 };
 
-module.exports = { getUsers, getUserById, UserType };
+// update user by id
+const updateUser = {
+  type: UserType,
+  description: "update user by id, optional fields can be updated",
+  args: {
+    id: { type: new GraphQLNonNull(GraphQLInt) },
+    first_name: { type: GraphQLString },
+    last_name: { type: GraphQLString },
+    dob: { type: GraphQLString },
+    email: { type: GraphQLString },
+    avatar: { type: GraphQLString },
+    dark_mode: { type: GraphQLBoolean },
+  },
+  resolve: async (parent, args) => {
+    let userObj = {
+      first_name: args.first_name,
+      last_name: args.last_name,
+      dob: args.dob,
+      email: args.email,
+      avatar: args.avatar,
+      dark_mode: args.dark_mode,
+    };
+    let user = await Users.getById(args.id);
+    if (!user) throw new Error(`user ID # ${args.id} does not exist`);
+    //update the user
+    return Users.updateUserID(userObj, args.id);
+  },
+};
+
+// Delete User
+const deleteUserID = {
+  type: UserType,
+  description: "delete user by id",
+  args: {
+    id: { type: new GraphQLNonNull(GraphQLInt) },
+  },
+  resolve: async (parent, args) => {
+    let user = await Users.getById(args.id);
+    if (!user) throw new Error(`user ID # ${args.id} does not exist`);
+    return Users.deleteUser(args.id);
+  },
+};
+
+module.exports = { UserType, getUsers, getUserById, updateUser, deleteUserID };

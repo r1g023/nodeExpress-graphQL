@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "cross-env NODE_ENV=testing jest --watch --verbose --runInBand --silent",
-    "server": "cross-env NODE_ENV=development nodemon --require dotenv/config index.js",
+    "server": "cross-env NODE_ENV=development nodemon index.js",
     "start": "node index.js",
     "migrate": "knex migrate:latest",
     "seed": "knex seed:run",
@@ -39,7 +39,6 @@
     "express": "^4.18.1",
     "express-graphql": "^0.12.0",
     "express-graphql-header": "^1.0.1",
-    "faker": "^5.5.3",
     "graphql": "^16.5.0",
     "helmet": "^5.1.0",
     "jsonwebtoken": "^8.5.1",
@@ -48,6 +47,7 @@
     "pg": "^8.7.3"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.3.0",
     "altair-express-middleware": "^4.5.0",
     "eslint": "^8.18.0",
     "nodemon": "^2.0.16"

@@ -9,7 +9,7 @@ exports.seed = function (knex) {
       content:
         "This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.",
       method: "Cook Shrimp: 1 lb, Chorizo: 1 lb",
-      completed: false,
+      liked: false,
       user_id: 1,
     },
     {
@@ -21,7 +21,7 @@ exports.seed = function (knex) {
       content:
         "These shrimp tacos are a great way to start the week off right. They are super easy to make and will be a great addition to your menu.",
       method: "Cook Shrimp: 1 lb",
-      completed: false,
+      liked: false,
       user_id: 2,
     },
     {
@@ -33,7 +33,7 @@ exports.seed = function (knex) {
       content:
         "Every meal would be better if it were pizza. Adding some bright, fresh ingredients on top of a frozen pizza can almost make it taste homemade. ",
       method: "place frozen pizza in the oven",
-      completed: false,
+      liked: false,
       user_id: 3,
     },
   ]);

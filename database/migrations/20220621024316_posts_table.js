@@ -5,10 +5,10 @@ exports.up = function (knex) {
         tbl.increments("id");
         tbl.string("title", 128).notNull();
         tbl.date("date").notNull();
-        tbl.string("image", 256).notNull().defaultTo(null);
+        tbl.string("image", 256).notNull();
         tbl.string("content", 256).notNull();
-        tbl.string("method", 256).notNull();
-        tbl.boolean("completed").defaultTo(false);
+        tbl.string("method", 256).nullable().defaultTo(null);
+        tbl.boolean("liked").defaultTo(false);
         tbl.timestamps(true, true);
         tbl
           .integer("user_id")
@@ -22,6 +22,7 @@ exports.up = function (knex) {
       .createTable("comments", (tbl) => {
         tbl.increments("id");
         tbl.string("comment", 256).notNull();
+        tbl.boolean("liked").defaultTo(false);
         tbl.timestamps(true, true);
         tbl
           .integer("post_id")

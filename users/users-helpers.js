@@ -5,14 +5,36 @@ module.exports = {
   getById,
   registerUser,
   loginUser,
+  updateUserID,
+  deleteUser,
 };
 
+// get list of users from db
 function getUsers() {
   return db("users").orderBy("id");
 }
 
+// get user by id
 function getById(id) {
   return db("users").where({ id }).first();
+}
+
+// update user by id
+function updateUserID(data, id) {
+  return db("users")
+    .update(data)
+    .where("id", id)
+    .then((ids) => {
+      return db("users").where({ id: id }).first();
+    });
+}
+
+// delete user by id
+async function deleteUser(id) {
+  const [user] = await db("users")
+    .del(["id", "email", "username"])
+    .where({ id });
+  return user;
 }
 
 //---------------------AUTH----------------------/

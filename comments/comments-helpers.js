@@ -4,8 +4,8 @@ module.exports = {
   getComments,
   getCommentById,
   addComment,
-  updateComment,
-  deleteComment,
+  updateCommentById,
+  deleteCommentById,
 };
 
 //get list of comments
@@ -29,16 +29,17 @@ function getCommentById(id) {
 }
 
 // update a comment
-function updateComment(data, id) {
+function updateCommentById(data, id) {
   return db("comments")
     .update(data)
     .where("id", id)
     .then((ids) => {
+      console.log("ids---update----->", ids);
       return db("comments").where({ id: id }).first();
     });
 }
 
 // delete a comment
-function deleteComment(id) {
+function deleteCommentById(id) {
   return db("comments").where({ id }).del();
 }

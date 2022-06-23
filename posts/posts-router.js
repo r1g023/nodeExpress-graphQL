@@ -9,6 +9,8 @@ const {
 
 const Posts = require("./posts-helpers");
 const Comments = require("../comments/comments-helpers");
+//import Users from "../users/users-helpers";
+const Users = require("../users/users-helpers");
 const { CommentType } = require("../comments/comments-router");
 
 //post schema for post list
@@ -19,10 +21,10 @@ const PostType = new GraphQLObjectType({
     id: { type: GraphQLInt },
     title: { type: new GraphQLNonNull(GraphQLString) },
     date: { type: new GraphQLNonNull(GraphQLString) },
-    image: { type: GraphQLString },
+    image: { type: new GraphQLNonNull(GraphQLString) },
     content: { type: new GraphQLNonNull(GraphQLString) },
-    method: { type: new GraphQLNonNull(GraphQLString) },
-    completed: { type: GraphQLBoolean },
+    method: { type: GraphQLString },
+    liked: { type: GraphQLBoolean },
     user_id: { type: new GraphQLNonNull(GraphQLInt) },
     //list of comments for a post
     comments: {
@@ -49,7 +51,9 @@ const getPostId = {
   type: PostType,
   description: "get post by id",
   args: { id: { type: new GraphQLNonNull(GraphQLInt) } },
-  resolve: (parent, args) => {
+  resolve: async (parent, args) => {
+    let postById = await Posts.getPostById(args.id);
+    if (!postById) throw new Error(`no id of ${args.id} found`);
     return Posts.getPostById(args.id);
   },
 };
@@ -63,21 +67,26 @@ const createPost = {
     date: { type: new GraphQLNonNull(GraphQLString) },
     image: { type: new GraphQLNonNull(GraphQLString) },
     content: { type: new GraphQLNonNull(GraphQLString) },
-    method: { type: new GraphQLNonNull(GraphQLString) },
-    completed: { type: GraphQLBoolean },
+    method: { type: GraphQLString },
+    liked: { type: GraphQLBoolean },
     user_id: { type: new GraphQLNonNull(GraphQLInt) },
   },
-  resolve: (parent, args) => {
+  resolve: async (parent, args) => {
     let newPost = {
       title: args.title,
       date: args.date,
       image: args.image,
       content: args.content,
       method: args.method,
-      completed: args.completed,
+      liked: args.liked,
       user_id: args.user_id,
     };
-    return Posts.addPost(newPost);
+    let users = await Users.getUsers();
+    let result = users.find((user) => user.id === args.user_id);
+    if (!result) throw new Error(`no id of ${args.user_id} found on user list`);
+
+    let posts = await Posts.addPost(newPost);
+    return posts;
   },
 };
 
@@ -88,15 +97,18 @@ const updatePost = {
   args: {
     id: { type: new GraphQLNonNull(GraphQLInt) },
     method: { type: GraphQLString },
-    completed: { type: GraphQLBoolean },
+    liked: { type: GraphQLBoolean },
+    image: { type: GraphQLString },
   },
   resolve: async (parent, args) => {
+    let post = {
+      method: args.method,
+      liked: args.liked,
+      image: args.image,
+    };
     let postById = await Posts.getPostById(args.id);
     if (!postById) throw new Error(`no id of ${args.id} found`);
-    return Posts.updatePost(
-      { method: args.method, completed: args.completed },
-      args.id
-    );
+    return Posts.updatePost(post, args.id);
   },
 };
 
@@ -104,7 +116,9 @@ const updatePost = {
 const deletePost = {
   type: PostType,
   description: "delete post by id",
-  args: { id: { type: new GraphQLNonNull(GraphQLInt) } },
+  args: {
+    id: { type: new GraphQLNonNull(GraphQLInt) },
+  },
   resolve: (parent, args) => {
     return Posts.deletePost(args.id);
   },

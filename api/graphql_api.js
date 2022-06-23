@@ -14,6 +14,7 @@ const {
   deleteAuthor,
   // getAuthorBooks,
 } = require("../authors/authors-routers");
+
 // Books database for
 const {
   getBooks,
@@ -22,8 +23,15 @@ const {
   updateBooks,
   deleteBook,
 } = require("../books/books-router");
+
 // users database
-const { getUsers, getUserById } = require("../users/users-router");
+const {
+  getUsers,
+  getUserById,
+  updateUser,
+  deleteUserID,
+} = require("../users/users-router");
+
 // posts database
 const {
   getPosts,
@@ -32,16 +40,16 @@ const {
   updatePost,
   deletePost,
 } = require("../posts/posts-router");
+
 // comments database
 const {
   getComments,
   getCommentId,
   addComment,
-  updateComment,
-  deleteComment,
+  updateCommentID,
 } = require("../comments/comments-router");
 
-//manipulate Authors, books, and users DB through root query
+//manipulate DB through root query
 const RootQueryType = new GraphQLObjectType({
   name: "Query",
   description: "Root Query to get list of authors and books",
@@ -82,8 +90,10 @@ const RootMutationType = new GraphQLObjectType({
     deletePost,
     // <--------- Mutations for Comments ------->
     addComment,
-    updateComment,
-    deleteComment,
+    updateCommentID,
+    // <--------- Mutations for Users ------->
+    updateUser,
+    deleteUserID,
   }),
 });
 
