@@ -46,6 +46,7 @@ const {
   getCommentId,
   addComment,
   updateCommentID,
+  deleteComment,
 } = require("../comments/comments-router");
 
 //manipulate DB through root query
@@ -69,6 +70,7 @@ const RootQueryType = new GraphQLObjectType({
     // <--------- List of Comments ------>
     getComments,
     getCommentId,
+    deleteComment,
   }),
 });
 
