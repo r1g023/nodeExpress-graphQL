@@ -48,7 +48,6 @@
     "pg": "^8.7.3"
   },
   "devDependencies": {
-    "altair-express-middleware": "^4.5.0",
     "eslint": "^8.18.0",
     "eslint-plugin-react": "^7.30.0",
     "nodemon": "^2.0.16"

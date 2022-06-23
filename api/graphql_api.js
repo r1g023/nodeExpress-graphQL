@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const expressGraphQL = require("express-graphql").graphqlHTTP;
-const { altairExpress } = require("altair-express-middleware");
 
 const { GraphQLSchema, GraphQLObjectType } = require("graphql");
 
