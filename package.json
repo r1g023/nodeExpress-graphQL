@@ -32,6 +32,7 @@
   },
   "homepage": "https://github.com/rigo0523/nodeExpress-graphQL#readme",
   "dependencies": {
+    "@faker-js/faker": "^7.3.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
@@ -47,7 +48,6 @@
     "pg": "^8.7.3"
   },
   "devDependencies": {
-    "@faker-js/faker": "^7.3.0",
     "altair-express-middleware": "^4.5.0",
     "eslint": "^8.18.0",
     "eslint-plugin-react": "^7.30.0",
