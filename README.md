@@ -59,7 +59,7 @@ _POST_ https://node-express-graphql-api.herokuapp.com/graphql/auth
 | getUsers: [Users] | updateUser: Users |
 | getUserById: Users | deleteUser: Users |
 | getPosts: [Posts] | createPost: Posts  |
-| getPostId: Posts | updatePost: Posts  * **__\|__** deletePost: Posts |
+| getPostId: Posts | updatePost: Posts   **__\|__** **__\|__** **__\|__**  deletePost: Posts |
 | getComments: [Comments] | addComment: Comments |
 | getCommentId: Comments | updateCommentID: Comments |
 
