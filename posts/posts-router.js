@@ -64,7 +64,7 @@ const createPost = {
   args: {
     title: { type: new GraphQLNonNull(GraphQLString) },
     date: { type: new GraphQLNonNull(GraphQLString) },
-    image: { type: new GraphQLNonNull(GraphQLString) },
+    image: { type: GraphQLString },
     content: { type: new GraphQLNonNull(GraphQLString) },
     method: { type: GraphQLString },
     liked: { type: GraphQLBoolean },
