@@ -6,7 +6,7 @@ exports.up = function (knex) {
     tbl.date("dob").nullable().defaultTo(null);
     tbl.string("email", 128).notNull().unique();
     tbl.string("username", 128).notNull().unique();
-    tbl.string("password", 128).notNull().unique();
+    tbl.string("password", 128).notNull();
     tbl.string("role", 128).notNull();
     tbl.string("avatar", 256).nullable().defaultTo(null);
     tbl.boolean("dark_mode").defaultTo(false);

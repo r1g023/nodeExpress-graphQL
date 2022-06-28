@@ -5,7 +5,7 @@ exports.up = function (knex) {
         tbl.increments("id");
         tbl.string("title", 128).notNull();
         tbl.date("date").notNull();
-        tbl.string("image", 256).notNull();
+        tbl.string("image", 256).nullable().defaultTo(null);
         tbl.string("content", 256).notNull();
         tbl.string("method", 256).nullable().defaultTo(null);
         tbl.boolean("liked").defaultTo(false);
