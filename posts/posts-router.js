@@ -25,6 +25,9 @@ const PostType = new GraphQLObjectType({
     method: { type: GraphQLString },
     liked: { type: GraphQLBoolean },
     user_id: { type: new GraphQLNonNull(GraphQLInt) },
+    created_at: { type: GraphQLString },
+    updated_at: { type: GraphQLString },
+
     //list of comments for a post
     comments: {
       type: new GraphQLList(CommentType),
@@ -69,6 +72,8 @@ const createPost = {
     method: { type: GraphQLString },
     liked: { type: GraphQLBoolean },
     user_id: { type: new GraphQLNonNull(GraphQLInt) },
+    created_at: { type: GraphQLString },
+    updated_at: { type: GraphQLString },
   },
   resolve: async (parent, args) => {
     let newPost = {
@@ -79,6 +84,8 @@ const createPost = {
       method: args.method,
       liked: args.liked,
       user_id: args.user_id,
+      created_at: args.created_at,
+      updated_at: args.updated_at,
     };
     let users = await Users.getUsers();
     let result = users.find((user) => user.id === args.user_id);
@@ -98,12 +105,14 @@ const updatePost = {
     method: { type: GraphQLString },
     liked: { type: GraphQLBoolean },
     image: { type: GraphQLString },
+    content: { type: GraphQLString },
   },
   resolve: async (parent, args) => {
     let post = {
       method: args.method,
       liked: args.liked,
       image: args.image,
+      content: args.content,
     };
     let postById = await Posts.getPostById(args.id);
     if (!postById) throw new Error(`post ID # ${args.id} does not exist`);

@@ -6,7 +6,7 @@ exports.seed = function (knex) {
   return knex("users").insert([
     // add first_name, last_name and dob to users table
     {
-      id: 1,
+      id: 1000,
       first_name: "user1_name",
       last_name: "user1_last_name",
       dob: "2022-12-29",
@@ -18,7 +18,7 @@ exports.seed = function (knex) {
       dark_mode: false,
     },
     {
-      id: 2,
+      id: 1001,
       first_name: "user2_name",
       last_name: "user2_last_name",
       dob: "2022-12-30",
@@ -30,7 +30,7 @@ exports.seed = function (knex) {
       dark_mode: false,
     },
     {
-      id: 3,
+      id: 1002,
       first_name: "user3_name",
       last_name: "user3_last_name",
       dob: "2022-12-31",

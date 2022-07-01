@@ -1,7 +1,7 @@
 exports.seed = function (knex) {
   return knex("posts").insert([
     {
-      id: 1,
+      id: 1000,
       title: "Shrimp and Chorizo Paella",
       date: "Jun 15, 2022",
       image:
@@ -10,10 +10,10 @@ exports.seed = function (knex) {
         "This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.",
       method: "Cook Shrimp: 1 lb, Chorizo: 1 lb",
       liked: false,
-      user_id: 1,
+      user_id: 1000,
     },
     {
-      id: 2,
+      id: 1001,
       title: "Shrimp Tacos",
       date: "Jun 16, 2022",
       image:
@@ -22,10 +22,10 @@ exports.seed = function (knex) {
         "These shrimp tacos are a great way to start the week off right. They are super easy to make and will be a great addition to your menu.",
       method: "Cook Shrimp: 1 lb",
       liked: false,
-      user_id: 2,
+      user_id: 1001,
     },
     {
-      id: 3,
+      id: 1002,
       title: "Frozen Pizza just like delivery",
       date: "Jun 17, 2022",
       image:
@@ -34,7 +34,7 @@ exports.seed = function (knex) {
         "Every meal would be better if it were pizza. Adding some bright, fresh ingredients on top of a frozen pizza can almost make it taste homemade. ",
       method: "place frozen pizza in the oven",
       liked: false,
-      user_id: 3,
+      user_id: 1002,
     },
   ]);
 };
