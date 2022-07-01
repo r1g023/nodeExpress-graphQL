@@ -19,6 +19,8 @@ const CommentType = new GraphQLObjectType({
     comment: { type: GraphQLString },
     liked: { type: GraphQLBoolean },
     post_id: { type: GraphQLInt },
+    created_at: { type: GraphQLString },
+    updated_at: { type: GraphQLString },
   }),
 });
 
@@ -52,6 +54,8 @@ const addComment = {
     id: { type: GraphQLInt },
     comment: { type: new GraphQLNonNull(GraphQLString) },
     post_id: { type: new GraphQLNonNull(GraphQLInt) },
+    created_at: { type: GraphQLString },
+    updated_at: { type: GraphQLString },
   },
   resolve: async (parent, args) => {
     console.log("args---->", args);

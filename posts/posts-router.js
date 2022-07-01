@@ -19,7 +19,7 @@ const PostType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLInt },
     title: { type: new GraphQLNonNull(GraphQLString) },
-    date: { type: new GraphQLNonNull(GraphQLString) },
+    date: { type: GraphQLString },
     image: { type: GraphQLString },
     content: { type: new GraphQLNonNull(GraphQLString) },
     method: { type: GraphQLString },
@@ -66,7 +66,7 @@ const createPost = {
   description: "create a new post",
   args: {
     title: { type: new GraphQLNonNull(GraphQLString) },
-    date: { type: new GraphQLNonNull(GraphQLString) },
+    date: { type: GraphQLString },
     image: { type: GraphQLString },
     content: { type: new GraphQLNonNull(GraphQLString) },
     method: { type: GraphQLString },

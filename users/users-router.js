@@ -92,6 +92,8 @@ const updateUser = {
     role: { type: GraphQLString },
     avatar: { type: GraphQLString },
     dark_mode: { type: GraphQLBoolean },
+    created_at: { type: GraphQLString },
+    updated_at: { type: GraphQLString },
   },
   resolve: async (parent, args) => {
     let userObj = {
@@ -102,6 +104,8 @@ const updateUser = {
       role: args.role,
       avatar: args.avatar,
       dark_mode: args.dark_mode,
+      created_at: { type: GraphQLString },
+      updated_at: { type: GraphQLString },
     };
     let user = await Users.getById(args.id);
     if (!user) throw new Error(`user ID # ${args.id} does not exist`);
