@@ -17,8 +17,7 @@ const registerUser = {
     password: { type: new GraphQLNonNull(GraphQLString) },
     role: { type: new GraphQLNonNull(GraphQLString) },
     avatar: { type: GraphQLString },
-    created_at: { type: GraphQLString },
-    updated_at: { type: GraphQLString },
+    about_you: { type: GraphQLString },
   },
   resolve: async (parent, args) => {
     const credentials = {
@@ -30,8 +29,7 @@ const registerUser = {
       password: bcrypt.hashSync(args.password, 10),
       role: args.role,
       avatar: args.avatar,
-      created_at: args.created_at,
-      updated_at: args.updated_at,
+      about_you: args.about_you,
     };
     try {
       let newUser = await User.registerUser(credentials);
@@ -49,16 +47,12 @@ const loginUser = {
   args: {
     username: { type: new GraphQLNonNull(GraphQLString) },
     password: { type: new GraphQLNonNull(GraphQLString) },
-    created_at: { type: GraphQLString },
-    updated_at: { type: GraphQLString },
   },
   resolve: async (parent, args) => {
     console.log("args password----->", args.password);
     try {
       let user = await User.loginUser({
         username: args.username,
-        created_at: args.created_at,
-        updated_at: args.updated_at,
       });
       let valid = bcrypt.compareSync(args.password, user.password);
       if (!valid) throw new Error("check your password or username");

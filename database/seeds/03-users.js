@@ -16,6 +16,7 @@ exports.seed = function (knex) {
       role: "admin",
       avatar: faker.image.avatar(),
       dark_mode: false,
+      about_you: null,
     },
     {
       id: 1001,
@@ -28,6 +29,7 @@ exports.seed = function (knex) {
       role: "admin",
       avatar: faker.image.avatar(),
       dark_mode: false,
+      about_you: null,
     },
     {
       id: 1002,
@@ -40,6 +42,7 @@ exports.seed = function (knex) {
       role: "admin",
       avatar: faker.image.avatar(),
       dark_mode: false,
+      about_you: null,
     },
   ]);
 };

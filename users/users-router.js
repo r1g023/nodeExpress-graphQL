@@ -18,7 +18,7 @@ const { CommentType } = require("../comments/comments-router");
 const UserType = new GraphQLObjectType({
   name: "Users",
   description: "Schema for registered users",
-  fields: (req, res) => ({
+  fields: () => ({
     id: { type: GraphQLInt },
     first_name: { type: GraphQLString },
     last_name: { type: GraphQLString },
@@ -37,6 +37,7 @@ const UserType = new GraphQLObjectType({
     },
     avatar: { type: GraphQLString },
     dark_mode: { type: GraphQLBoolean },
+    about_you: { type: GraphQLString },
     created_at: { type: GraphQLString },
     updated_at: { type: GraphQLString },
     // get posts by user from db
@@ -92,8 +93,7 @@ const updateUser = {
     role: { type: GraphQLString },
     avatar: { type: GraphQLString },
     dark_mode: { type: GraphQLBoolean },
-    created_at: { type: GraphQLString },
-    updated_at: { type: GraphQLString },
+    about_you: { type: GraphQLString },
   },
   resolve: async (parent, args) => {
     let userObj = {
@@ -104,8 +104,7 @@ const updateUser = {
       role: args.role,
       avatar: args.avatar,
       dark_mode: args.dark_mode,
-      created_at: { type: GraphQLString },
-      updated_at: { type: GraphQLString },
+      about_you: args.about_you,
     };
     let user = await Users.getById(args.id);
     if (!user) throw new Error(`user ID # ${args.id} does not exist`);

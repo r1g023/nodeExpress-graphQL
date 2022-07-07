@@ -24,8 +24,7 @@ async function addPost(data) {
     "title",
     "date",
     "image",
-    "content",
-    "method",
+    "post",
     "liked",
     "user_id",
   ]);

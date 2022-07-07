@@ -44,10 +44,16 @@ async function registerUser(user) {
   // UNLIKE SQLITE WHICH FORCES US DO DO A 2ND DB CALL
   const [newUserObject] = await db("users").insert(user, [
     "id",
+    "first_name",
+    "last_name",
+    "dob",
     "email",
     "username",
     "password",
     "role",
+    "avatar",
+    "dark_mode",
+    "about_you",
   ]);
   return newUserObject;
 }

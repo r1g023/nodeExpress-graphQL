@@ -19,15 +19,13 @@ const PostType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLInt },
     title: { type: new GraphQLNonNull(GraphQLString) },
-    date: { type: GraphQLString },
+    date: { type: new GraphQLNonNull(GraphQLString) },
     image: { type: GraphQLString },
-    content: { type: new GraphQLNonNull(GraphQLString) },
-    method: { type: GraphQLString },
+    post: { type: new GraphQLNonNull(GraphQLString) },
     liked: { type: GraphQLBoolean },
     user_id: { type: new GraphQLNonNull(GraphQLInt) },
     created_at: { type: GraphQLString },
     updated_at: { type: GraphQLString },
-
     //list of comments for a post
     comments: {
       type: new GraphQLList(CommentType),
@@ -43,7 +41,7 @@ const PostType = new GraphQLObjectType({
 const getPosts = {
   type: new GraphQLList(PostType),
   description: "get list of posts",
-  resolve: (parent, args) => {
+  resolve: () => {
     return Posts.getPosts();
   },
 };
@@ -66,10 +64,9 @@ const createPost = {
   description: "create a new post",
   args: {
     title: { type: new GraphQLNonNull(GraphQLString) },
-    date: { type: GraphQLString },
+    date: { type: new GraphQLNonNull(GraphQLString) },
     image: { type: GraphQLString },
-    content: { type: new GraphQLNonNull(GraphQLString) },
-    method: { type: GraphQLString },
+    post: { type: new GraphQLNonNull(GraphQLString) },
     liked: { type: GraphQLBoolean },
     user_id: { type: new GraphQLNonNull(GraphQLInt) },
     created_at: { type: GraphQLString },
@@ -80,8 +77,7 @@ const createPost = {
       title: args.title,
       date: args.date,
       image: args.image,
-      content: args.content,
-      method: args.method,
+      post: args.post,
       liked: args.liked,
       user_id: args.user_id,
       created_at: args.created_at,
@@ -105,7 +101,7 @@ const updatePost = {
     method: { type: GraphQLString },
     liked: { type: GraphQLBoolean },
     image: { type: GraphQLString },
-    content: { type: GraphQLString },
+    post: { type: GraphQLString },
   },
   resolve: async (parent, args) => {
     let post = {

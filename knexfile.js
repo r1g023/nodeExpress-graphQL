@@ -4,11 +4,11 @@ var types = require("pg").types;
 var moment = require("moment"); // require
 
 types.setTypeParser(1184, (str) =>
-  moment(str).format("MMMM Do YYYY, h:mm:ss a")
+  moment.utc(str).format("MMMM Do YYYY, h:mm:ss a")
 );
 // parte the Date column into moment format and store it in the database
 types.setTypeParser(1082, (str) =>
-  moment(str).format("MMMM Do YYYY, h:mm:ss a")
+  moment.utc(str).format("MMMM Do YYYY, h:mm:ss a")
 );
 
 if (process.env.DATABASE_URL) {

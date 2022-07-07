@@ -6,8 +6,7 @@ exports.up = function (knex) {
         tbl.string("title", 128).notNull();
         tbl.date("date").notNull();
         tbl.string("image", 256).nullable().defaultTo(null);
-        tbl.string("content", 256).notNull();
-        tbl.string("method", 256).nullable().defaultTo(null);
+        tbl.string("post", 1000).notNull();
         tbl.boolean("liked").defaultTo(false);
         tbl.timestamps(true, true);
         tbl
@@ -21,7 +20,7 @@ exports.up = function (knex) {
       //create comments table
       .createTable("comments", (tbl) => {
         tbl.increments("id");
-        tbl.string("comment", 256).notNull();
+        tbl.string("comment", 500).notNull();
         tbl.boolean("liked").defaultTo(false);
         tbl.timestamps(true, true);
         tbl

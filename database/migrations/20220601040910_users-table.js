@@ -10,6 +10,7 @@ exports.up = function (knex) {
     tbl.string("role", 128).notNull();
     tbl.string("avatar", 256).nullable().defaultTo(null);
     tbl.boolean("dark_mode").defaultTo(false);
+    tbl.string("about_you", 256).nullable().defaultTo(null);
     tbl.timestamps(true, true);
   });
 };
