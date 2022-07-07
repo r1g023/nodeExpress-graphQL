@@ -109,6 +109,7 @@ const updatePost = {
       liked: args.liked,
       image: args.image,
       post: args.post,
+      //
     };
     let postById = await Posts.getPostById(args.id);
     if (!postById) throw new Error(`post ID # ${args.id} does not exist`);
