@@ -10,6 +10,13 @@ exports.up = function (knex) {
         tbl.boolean("liked").defaultTo(false);
         tbl.timestamps(true, true);
         tbl
+          .string("user")
+          .unsigned()
+          .notNull()
+          .references("users.username")
+          .onDelete("CASCADE")
+          .onUpdate("CASCADE");
+        tbl
           .integer("user_id")
           .unsigned()
           .notNull()
@@ -17,12 +24,20 @@ exports.up = function (knex) {
           .onDelete("CASCADE")
           .onUpdate("CASCADE");
       })
+
       //create comments table
       .createTable("comments", (tbl) => {
         tbl.increments("id");
         tbl.string("comment", 500).notNull();
         tbl.boolean("liked").defaultTo(false);
         tbl.timestamps(true, true);
+        tbl
+          .string("user")
+          .unsigned()
+          .notNull()
+          .references("users.username")
+          .onDelete("CASCADE")
+          .onUpdate("CASCADE");
         tbl
           .integer("post_id")
           .unsigned()
