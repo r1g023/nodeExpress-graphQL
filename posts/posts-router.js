@@ -17,12 +17,13 @@ const PostType = new GraphQLObjectType({
   name: "Posts",
   description: "Get a list of posts",
   fields: () => ({
-    id: { type: GraphQLInt },
+    id: { type: new GraphQLNonNull(GraphQLInt) },
     title: { type: new GraphQLNonNull(GraphQLString) },
     date: { type: new GraphQLNonNull(GraphQLString) },
     image: { type: GraphQLString },
     post: { type: new GraphQLNonNull(GraphQLString) },
     liked: { type: GraphQLBoolean },
+    user: { type: new GraphQLNonNull(GraphQLString) },
     user_id: { type: new GraphQLNonNull(GraphQLInt) },
     created_at: { type: GraphQLString },
     updated_at: { type: GraphQLString },
@@ -68,6 +69,7 @@ const createPost = {
     image: { type: GraphQLString },
     post: { type: new GraphQLNonNull(GraphQLString) },
     liked: { type: GraphQLBoolean },
+    user: { type: new GraphQLNonNull(GraphQLString) },
     user_id: { type: new GraphQLNonNull(GraphQLInt) },
     created_at: { type: GraphQLString },
     updated_at: { type: GraphQLString },
@@ -79,6 +81,7 @@ const createPost = {
       image: args.image,
       post: args.post,
       liked: args.liked,
+      user: args.user,
       user_id: args.user_id,
       created_at: args.created_at,
       updated_at: args.updated_at,
@@ -109,7 +112,6 @@ const updatePost = {
       liked: args.liked,
       image: args.image,
       post: args.post,
-      //
     };
     let postById = await Posts.getPostById(args.id);
     if (!postById) throw new Error(`post ID # ${args.id} does not exist`);

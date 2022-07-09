@@ -26,6 +26,7 @@ async function addPost(data) {
     "image",
     "post",
     "liked",
+    "user",
     "user_id",
   ]);
   return newPost;
@@ -44,6 +45,8 @@ function updatePost(data, id) {
 // delete a post by its Id
 async function deletePost(id) {
   //return id and title after delete
-  const [deletedPost] = await db("posts").del(["id", "title"]).where({ id });
+  const [deletedPost] = await db("posts")
+    .del(["id", "title", "user"])
+    .where({ id });
   return deletedPost;
 }

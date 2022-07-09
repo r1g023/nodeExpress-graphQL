@@ -18,6 +18,8 @@ async function addComment(data) {
   const [newComment] = await db("comments").insert(data, [
     "id",
     "comment",
+    "liked",
+    "user",
     "post_id",
   ]);
   return newComment;
@@ -42,7 +44,7 @@ function updateCommentById(data, id) {
 async function deleteCommentById(id) {
   //return id and title after delete
   const [deletedComment] = await db("comments")
-    .del(["id", "comment", "liked", "post_id"])
+    .del(["id", "comment", "liked", "user", "post_id"])
     .where({ id });
   return deletedComment;
 }

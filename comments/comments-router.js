@@ -15,10 +15,11 @@ const CommentType = new GraphQLObjectType({
   name: "Comments",
   description: "Get a list of comments",
   fields: () => ({
-    id: { type: GraphQLInt },
-    comment: { type: GraphQLString },
+    id: { type: new GraphQLNonNull(GraphQLInt) },
+    comment: { type: new GraphQLNonNull(GraphQLString) },
     liked: { type: GraphQLBoolean },
-    post_id: { type: GraphQLInt },
+    user: { type: new GraphQLNonNull(GraphQLString) },
+    post_id: { type: new GraphQLNonNull(GraphQLInt) },
     created_at: { type: GraphQLString },
     updated_at: { type: GraphQLString },
   }),
@@ -53,6 +54,7 @@ const addComment = {
   args: {
     id: { type: GraphQLInt },
     comment: { type: new GraphQLNonNull(GraphQLString) },
+    user: { type: new GraphQLNonNull(GraphQLString) },
     post_id: { type: new GraphQLNonNull(GraphQLInt) },
     created_at: { type: GraphQLString },
     updated_at: { type: GraphQLString },
@@ -76,13 +78,11 @@ const updateCommentID = {
     id: { type: new GraphQLNonNull(GraphQLInt) },
     comment: { type: new GraphQLNonNull(GraphQLString) },
     liked: { type: GraphQLBoolean },
-    post_id: { type: GraphQLInt },
   },
   resolve: async (parent, args) => {
     let commentArg = {
       comment: args.comment,
       liked: args.liked,
-      post_id: args.post_id,
     };
     let comment = await Comments.updateCommentById(commentArg, args.id);
     if (!comment)
