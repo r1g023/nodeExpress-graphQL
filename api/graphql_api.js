@@ -1,8 +1,13 @@
-const express = require("express");
-const router = express.Router();
-const expressGraphQL = require("express-graphql").graphqlHTTP;
+const express = require("express")
+const router =
+  express.Router()
+const expressGraphQL =
+  require("express-graphql").graphqlHTTP
 
-const { GraphQLSchema, GraphQLObjectType } = require("graphql");
+const {
+  GraphQLSchema,
+  GraphQLObjectType,
+} = require("graphql")
 
 //Authors database
 const {
@@ -12,7 +17,7 @@ const {
   updateAuthorId,
   deleteAuthor,
   // getAuthorBooks,
-} = require("../authors/authors-routers");
+} = require("../authors/authors-routers")
 
 // Books database for
 const {
@@ -21,7 +26,7 @@ const {
   addBook,
   updateBooks,
   deleteBook,
-} = require("../books/books-router");
+} = require("../books/books-router")
 
 // users database
 const {
@@ -29,7 +34,7 @@ const {
   getUserById,
   updateUser,
   deleteUserID,
-} = require("../users/users-router");
+} = require("../users/users-router")
 
 // posts database
 const {
@@ -38,7 +43,7 @@ const {
   createPost,
   updatePost,
   deletePost,
-} = require("../posts/posts-router");
+} = require("../posts/posts-router")
 
 // comments database
 const {
@@ -47,65 +52,86 @@ const {
   addComment,
   updateCommentID,
   deleteCommentID,
-} = require("../comments/comments-router");
+} = require("../comments/comments-router")
 
 //manipulate DB through root query
-const RootQueryType = new GraphQLObjectType({
-  name: "Query",
-  description: "Root Query to get list of authors and books",
-  //data coming from authors and books routers
-  fields: () => ({
-    // <--------- list of authors ----->
-    getAuthors,
-    getAuthorId,
-    // <--------- List of books ------>
-    getBooks,
-    getBookId,
-    // <--------- List of Users ------>
-    getUsers,
-    getUserById,
-    // <--------- List of Posts ------>
-    getPosts,
-    getPostId,
-    // <--------- List of Comments ------>
-    getComments,
-    getCommentId,
-  }),
-});
+const RootQueryType =
+  new GraphQLObjectType(
+    {
+      name: "Query",
+      description:
+        "Root Query to get list of authors and books",
+      //data coming from authors and books routers
+      fields:
+        () => ({
+          // <--------- list of authors ----->
+          getAuthors,
+          getAuthorId,
+          // <--------- List of books ------>
+          getBooks,
+          getBookId,
+          // <--------- List of Users ------>
+          getUsers,
+          getUserById,
+          // <--------- List of Posts ------>
+          getPosts,
+          getPostId,
+          // <--------- List of Comments ------>
+          getComments,
+          getCommentId,
+        }),
+    }
+  )
 
-const RootMutationType = new GraphQLObjectType({
-  name: "Mutation",
-  fields: () => ({
-    // <--------- Mutation for Authors ------>
-    createAuthor,
-    updateAuthorId,
-    deleteAuthor,
-    // <--------- Mutations for Books ------->
-    addBook,
-    updateBooks,
-    deleteBook,
-    // <--------- Mutations for Posts ------->
-    createPost,
-    updatePost,
-    deletePost,
-    // <--------- Mutations for Comments ------->
-    addComment,
-    updateCommentID,
-    deleteCommentID,
-    // <--------- Mutations for Users ------->
-    updateUser,
-    deleteUserID,
-  }),
-});
+const RootMutationType =
+  new GraphQLObjectType(
+    {
+      name: "Mutation",
+      fields:
+        () => ({
+          // <--------- Mutation for Authors ------>
+          createAuthor,
+          updateAuthorId,
+          deleteAuthor,
+          // <--------- Mutations for Books ------->
+          addBook,
+          updateBooks,
+          deleteBook,
+          // <--------- Mutations for Posts ------->
+          createPost,
+          updatePost,
+          deletePost,
+          // <--------- Mutations for Comments ------->
+          addComment,
+          updateCommentID,
+          deleteCommentID,
+          // <--------- Mutations for Users ------->
+          updateUser,
+          deleteUserID,
+        }),
+    }
+  )
 
-const schema = new GraphQLSchema({
-  //getting of data
-  query: RootQueryType,
-  //adding mutations CRUD
-  mutation: RootMutationType,
-});
+const schema =
+  new GraphQLSchema(
+    {
+      //getting of data
+      query:
+        RootQueryType,
+      //adding mutations CRUD
+      mutation:
+        RootMutationType,
+    }
+  )
 
 // router.use(restrictedUser(), checkRole());
-router.use("/", expressGraphQL({ schema: schema, graphiql: true }));
+router.use(
+  "/",
+  expressGraphQL({
+    schema: schema,
+    graphiql: true,
+  })
+)
 
-module.exports = router;
+module.exports =
+  router

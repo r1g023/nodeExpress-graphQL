@@ -30,6 +30,7 @@ exports.up = function (knex) {
         tbl.increments("id");
         tbl.string("comment", 500).notNull();
         tbl.boolean("liked").defaultTo(false);
+        tbl.integer("count").defaultTo(0); // get the count for likes
         tbl.timestamps(true, true);
         tbl
           .string("user")
@@ -43,6 +44,25 @@ exports.up = function (knex) {
           .unsigned()
           .notNull()
           .references("posts.id")
+          .onDelete("CASCADE")
+          .onUpdate("CASCADE");
+      })
+
+      // comments_like table
+      .createTable("comment_likes", (tbl) => {
+        tbl.increments("id");
+        tbl
+          .integer("user_id")
+          .unsigned()
+          .notNull()
+          .references("users.id")
+          .onDelete("CASCADE")
+          .onUpdate("CASCADE");
+        tbl
+          .integer("comment_id")
+          .unsigned()
+          .notNull()
+          .references("comments.id")
           .onDelete("CASCADE")
           .onUpdate("CASCADE");
       })

@@ -51,9 +51,19 @@ const UserType = new GraphQLObjectType({
       comments: {
         type: new GraphQLList(CommentType),
         resolve: async (user) => {
+          console.log("user--->", user);
           let comments = await Comments.getComments();
-          return comments.filter((comment) => comment.user_id === user.id);
+          return comments.filter((comment) => comment.post_id === user.id);
         },
+      },
+    },
+    // get comments
+    comments: {
+      type: new GraphQLList(CommentType),
+      resolve: async (user) => {
+        console.log("user---comments >", user);
+        let comments = await Comments.getComments();
+        return comments.filter((comment) => comment.user === user.username);
       },
     },
   }),

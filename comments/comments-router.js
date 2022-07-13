@@ -76,7 +76,7 @@ const updateCommentID = {
   description: "update a comment",
   args: {
     id: { type: new GraphQLNonNull(GraphQLInt) },
-    comment: { type: new GraphQLNonNull(GraphQLString) },
+    comment: { type: GraphQLString },
     liked: { type: GraphQLBoolean },
   },
   resolve: async (parent, args) => {
