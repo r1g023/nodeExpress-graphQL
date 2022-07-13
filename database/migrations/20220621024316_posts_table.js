@@ -65,6 +65,7 @@ exports.up = function (knex) {
           .references("comments.id")
           .onDelete("CASCADE")
           .onUpdate("CASCADE");
+        tbl.timestamps(true, true);
       })
   );
 };
