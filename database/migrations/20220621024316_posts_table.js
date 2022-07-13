@@ -71,5 +71,8 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-  return knex.schema.dropTableIfExists("comments").dropTableIfExists("posts");
+  return knex.schema
+    .dropTableIfExists("comment_likes")
+    .dropTableIfExists("comments")
+    .dropTableIfExists("posts");
 };
