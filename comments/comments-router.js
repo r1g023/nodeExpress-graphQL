@@ -18,6 +18,7 @@ const CommentType = new GraphQLObjectType({
     id: { type: new GraphQLNonNull(GraphQLInt) },
     comment: { type: new GraphQLNonNull(GraphQLString) },
     liked: { type: GraphQLBoolean },
+    count: { type: GraphQLInt },
     user: { type: new GraphQLNonNull(GraphQLString) },
     post_id: { type: new GraphQLNonNull(GraphQLInt) },
     created_at: { type: GraphQLString },
@@ -78,6 +79,7 @@ const updateCommentID = {
     id: { type: new GraphQLNonNull(GraphQLInt) },
     comment: { type: GraphQLString },
     liked: { type: GraphQLBoolean },
+    count: { type: GraphQLInt },
   },
   resolve: async (parent, args) => {
     let commentArg = {
