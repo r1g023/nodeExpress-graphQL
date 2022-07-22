@@ -23,6 +23,9 @@ const CommentType = new GraphQLObjectType({
     post_id: { type: new GraphQLNonNull(GraphQLInt) },
     created_at: { type: GraphQLString },
     updated_at: { type: GraphQLString },
+    comment_likes: {
+      type: new GraphQLList(CommentType),
+    },
   }),
 });
 
@@ -30,7 +33,7 @@ const CommentType = new GraphQLObjectType({
 const getComments = {
   type: new GraphQLList(CommentType),
   description: "get list of comments",
-  resolve: (parent, args) => {
+  resolve: () => {
     return Comments.getComments();
   },
 };
@@ -85,6 +88,7 @@ const updateCommentID = {
     let commentArg = {
       comment: args.comment,
       liked: args.liked,
+      count: args.count,
     };
     let comment = await Comments.updateCommentById(commentArg, args.id);
     if (!comment)
@@ -109,6 +113,15 @@ const deleteCommentID = {
   },
 };
 
+// get join comment_likes by user id
+const getCommentLikes = {
+  type: new GraphQLList(CommentType),
+  description: "get list of comments",
+  resolve: () => {
+    return Comments.getCommentLikes();
+  },
+};
+
 module.exports = {
   CommentType,
   getComments,
@@ -116,4 +129,5 @@ module.exports = {
   addComment,
   updateCommentID,
   deleteCommentID,
+  getCommentLikes,
 };

@@ -137,4 +137,27 @@ const deleteUserID = {
   },
 };
 
-module.exports = { UserType, getUsers, getUserById, updateUser, deleteUserID };
+// confirm if a user has liked a comment from the comment_likes table and then compare to the Comments.getCommentLikes() method from the comments-router.js file
+const getCommentLikes = {
+  type: UserType,
+  description: "get user likes",
+  args: {
+    id: { type: new GraphQLNonNull(GraphQLInt) },
+  },
+  resolve: async (parent, args) => {
+    let user = await Users.getById(args.id);
+    if (!user) throw new Error(`user ID # ${args.id} does not exist`);
+    let commentLikes = await Comments.getCommentLikes(args.id);
+    console.log("commentLikes--->", commentLikes);
+    return commentLikes.filter((item) => item.id === args.id);
+  },
+};
+
+module.exports = {
+  UserType,
+  getUsers,
+  getUserById,
+  updateUser,
+  deleteUserID,
+  getCommentLikes,
+};

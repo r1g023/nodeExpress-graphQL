@@ -36,7 +36,7 @@ function updateCommentById(data, id) {
   return db("comments")
     .update(data)
     .where("id", id)
-    .then((ids) => {
+    .then(() => {
       return db("comments").where({ id: id }).first();
     });
 }
@@ -53,8 +53,8 @@ async function deleteCommentById(id) {
 // get comment likes
 function getCommentLikes(id) {
   return db("comment_likes")
-    .where({ comment_id: id })
     .join("users", "users.id", "=", "comment_likes.user_id")
     .join("comments", "comments.id", "=", "comment_likes.comment_id")
-    .select("*");
+    .select("*")
+    .where({ user_id: id });
 }
