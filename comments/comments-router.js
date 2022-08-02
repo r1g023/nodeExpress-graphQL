@@ -21,6 +21,7 @@ const CommentType = new GraphQLObjectType({
     count: { type: GraphQLInt },
     user: { type: new GraphQLNonNull(GraphQLString) },
     post_id: { type: new GraphQLNonNull(GraphQLInt) },
+    date: { type: GraphQLString },
     created_at: { type: GraphQLString },
     updated_at: { type: GraphQLString },
     comment_likes: {
@@ -60,6 +61,7 @@ const addComment = {
     comment: { type: new GraphQLNonNull(GraphQLString) },
     user: { type: new GraphQLNonNull(GraphQLString) },
     post_id: { type: new GraphQLNonNull(GraphQLInt) },
+    date: { type: GraphQLString },
     created_at: { type: GraphQLString },
     updated_at: { type: GraphQLString },
   },

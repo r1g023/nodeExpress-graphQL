@@ -22,6 +22,7 @@ async function addComment(data) {
     "liked",
     "user",
     "post_id",
+    "date",
   ]);
   return newComment;
 }

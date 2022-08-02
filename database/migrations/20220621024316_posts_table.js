@@ -31,6 +31,7 @@ exports.up = function (knex) {
         tbl.string("comment", 500).notNull();
         tbl.boolean("liked").defaultTo(false);
         tbl.integer("count").defaultTo(0); // get the count for likes
+        tbl.date("date");
         tbl.timestamps(true, true);
         tbl
           .string("user")
