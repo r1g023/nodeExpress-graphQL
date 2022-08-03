@@ -4,10 +4,11 @@ exports.up = function (knex) {
       .createTable("posts", (tbl) => {
         tbl.increments("id");
         tbl.string("title", 128).notNull();
-        tbl.date("date").notNull();
+        tbl.string("date", 128);
         tbl.string("image", 256).nullable().defaultTo(null);
         tbl.string("post", 1000).notNull();
         tbl.boolean("liked").defaultTo(false);
+        tbl.integer("count").defaultTo(0);
         tbl.timestamps(true, true);
         tbl
           .string("user")
@@ -31,7 +32,7 @@ exports.up = function (knex) {
         tbl.string("comment", 500).notNull();
         tbl.boolean("liked").defaultTo(false);
         tbl.integer("count").defaultTo(0); // get the count for likes
-        tbl.date("date");
+        tbl.string("date", 120);
         tbl.timestamps(true, true);
         tbl
           .string("user")
