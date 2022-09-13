@@ -13,7 +13,7 @@ const graphql_auth = require("./graphql_auth");
 // Server Endpoint ----->
 server.use("/", welcomeRouter);
 server.use("/graphql/auth", graphql_auth);
-server.use("/graphql", restrictedUser(), checkRole("admin"), graphql_api);
+server.use("/graphql", restrictedUser(), graphql_api);
 
 // middleware for CATCH ERROR
 server.use((err, req, res, next) => {

@@ -1,15 +1,15 @@
 require("dotenv").config();
 const pg = require("pg");
 var types = require("pg").types;
-var moment = require("moment"); // require
+var moment = require("moment");
 
-types.setTypeParser(1184, (str) =>
-  moment.utc(str).format("MMMM Do YYYY, h:mm:ss a")
-);
 // parte the Date column into moment format and store it in the database
-types.setTypeParser(1082, (str) =>
-  moment.utc(str).format("MMMM Do YYYY, h:mm:ss a")
-);
+types.setTypeParser(1184, (str) => moment.utc(str).format("MM/DD/YYYY"));
+types.setTypeParser(1082, (str) => moment.utc(str).format("MM/DD/YYYY"));
+types.setTypeParser(1114, (str) => moment.utc(str).format("MM/DD/YYYY"));
+types.setTypeParser(1083, (str) => moment.utc(str).format("MM/DD/YYYY"));
+types.setTypeParser(1182, (str) => moment.utc(str).format("MM/DD/YYYY"));
+types.setTypeParser(1266, (str) => moment.utc(str).format("MM/DD/YYYY"));
 
 if (process.env.DATABASE_URL) {
   pg.defaults.ssl = { rejectUnauthorized: false };
