@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 // const expressGraphQL = require("express-graphql").graphqlHTTP;
-var { graphqlHTTP } = require('express-graphql');
+
+var { graphqlHTTP } = require("express-graphql");
 
 const { GraphQLSchema, GraphQLObjectType } = require("graphql");
 
