@@ -11,7 +11,7 @@ module.exports = {
 
 //get list of comments
 function getComments() {
-  return db("comments").select("*").orderBy("id");
+  return db("comments").select("*").orderBy("created_at", "");
 }
 
 // add a new comment

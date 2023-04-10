@@ -9,7 +9,7 @@ module.exports = {
 
 //get list of authors
 function getPosts() {
-  return db("posts").select("*").orderBy("id").reverse();
+  return db("posts").select("*").orderBy("created_at", "");
 }
 
 //get post by id from db
