@@ -21,17 +21,20 @@ const sharedConfig = {
   seeds: { directory: "./database/seeds" },
 };
 
+// connect to DB_CONNECTION_STRING
+
 module.exports = {
   development: {
     ...sharedConfig,
     connection: process.env.DEV_DATABASE_URL,
   },
 
-  developmentProduction: {
+  // connect to DB_CONNECTION_STRING
+  renderdb: {
     ...sharedConfig,
-    // DB_CONNECTION_STRING
     connection: process.env.DB_CONNECTION_STRING,
   },
+
   testing: {
     ...sharedConfig,
     connection: process.env.TESTING_DATABASE_URL,
