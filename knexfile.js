@@ -29,12 +29,6 @@ module.exports = {
     connection: process.env.DEV_DATABASE_URL,
   },
 
-  // connect to DB_CONNECTION_STRING
-  renderdb: {
-    ...sharedConfig,
-    connection: process.env.DB_CONNECTION_STRING,
-  },
-
   testing: {
     ...sharedConfig,
     connection: process.env.TESTING_DATABASE_URL,
