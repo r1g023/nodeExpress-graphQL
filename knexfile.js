@@ -29,14 +29,14 @@ module.exports = {
     connection: process.env.DEV_DATABASE_URL,
   },
 
-  // testing: {
-  //   ...sharedConfig,
-  //   connection: process.env.TESTING_DATABASE_URL,
-  // },
+  testing: {
+    ...sharedConfig,
+    connection: process.env.TESTING_DATABASE_URL,
+  },
   // render db - test
   production: {
     ...sharedConfig,
-    connection: process.env.DATABASE_URL,
+    connection: process.env.DBConnLink,
     pool: { min: 2, max: 10 },
   },
 };
