@@ -33,10 +33,10 @@ module.exports = {
     ...sharedConfig,
     connection: process.env.TESTING_DATABASE_URL,
   },
-  // render db - test
+  // railway database
   production: {
     ...sharedConfig,
-    connection: process.env.DBConnLink,
+    connection: process.env.DATABASE_URL,
     pool: { min: 2, max: 10 },
   },
 };
