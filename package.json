@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=testing jest --watch --verbose --runInBand --silent",
-    "server": "cross-env NODE_ENV=development nodemon index.js",
+    "test": "cross-env NODE_ENV=testing jest --watch --verbose --runInBand --silent --omit=dev",
+    "server": "cross-env NODE_ENV=production nodemon index.js",
     "start": "node index.js",
     "migrate": "knex migrate:latest",
     "seed": "knex seed:run",
