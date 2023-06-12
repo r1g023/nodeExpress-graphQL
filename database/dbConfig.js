@@ -4,5 +4,5 @@ const config = require("../knexfile");
 
 // seed test //
 // production
-const environment = process.env.NODE_ENV || "production";
+const environment = "production";
 module.exports = knex(config[environment]);
