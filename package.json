@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "cross-env NODE_ENV=testing jest --watch --verbose --runInBand --silent --omit=dev",
-    "server": "cross-env NODE_ENV=production nodemon index.js",
+    "server": "cross-env NODE_ENV=development nodemon index.js",
     "start": "node index.js",
     "migrate": "knex migrate:latest",
     "seed": "knex seed:run",
@@ -14,7 +14,11 @@
     "rollbackh": "heroku run knex migrate:rollback -a node-express-graphql-api",
     "seedh": "heroku run knex seed:run -a node-express-graphql-api",
     "databaseh": "heroku pg:psql -a node-express-graphql-api",
-    "deploy": "git push heroku main"
+    "deploy": "git push heroku main",
+    "migrater": "railway run knex migrate:latest --env production",
+    "rollbackr": "railway run knex migrate:rollback --env production",
+    "seedr": "railway run knex seed:run --env production",
+    "deployr": "railway up --env production"
   },
   "engines": {
     "node": "19.8.1",
