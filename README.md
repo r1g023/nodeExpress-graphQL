@@ -2,14 +2,14 @@
 
 
 
-_GET_ https://node-express-graphql-api.herokuapp.com/graphql
+_GET_ [https://nodeexpress-graphql-production.up.railway.app/graphql]
 
 1) you will be prompted to go to graphql/auth to register or login in order to access the graphql endpoint.
 
 
 
 _REGISTER_
-_POST_ https://node-express-graphql-api.herokuapp.com/graphql/auth
+_POST_ [https://nodeexpress-graphql-production.up.railway.app/graphql/auth]
 
 1) You will register as a new user
 2) Password is hashed and salted, actual password is not stored anywhere in the database.
@@ -29,9 +29,9 @@ _POST_ https://node-express-graphql-api.herokuapp.com/graphql/auth
 _LOGIN_
 _POST_ https://node-express-graphql-api.herokuapp.com/graphql/auth
 
-1) you will login as user after registering for the first time.
+1) you will login as a user after registering for the first time.
 2) Once logged in, you will receive a token, use this token on client request headers, specifically authorization to get access to the graphql endpoint. 
-3) I recommend using the chrome ModHeader extension to add the token to the request headers or use your own GraphQL client.
+3) I recommend using the chrome ModHeader extension to add the token to the request headers or using your own GraphQL client.
 4) [ModHeader](https://chrome.google.com/webstore/detail/modheader/idgpnmonknjnojddfkpgkljpfnnfcklj?hl=en)
    
  ```javascript
@@ -41,7 +41,7 @@ _POST_ https://node-express-graphql-api.herokuapp.com/graphql/auth
                     username
                     email
                     role
-                    token - _*this is the token you will use to access the graphql endpoint*_
+                    token - _*This is the token you will use to access the graphql endpoint*_
              }
             }
 ```
