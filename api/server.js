@@ -1,7 +1,5 @@
 const express = require("express");
-
 const server = express();
-const ws = require("express-ws")(server);
 const cors = require("cors");
 const { restrictedUser, checkRole } = require("../auth/auth-middleware");
 // GLOBAL MIDDLEWARE

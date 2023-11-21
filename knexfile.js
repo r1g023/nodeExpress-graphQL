@@ -2,13 +2,6 @@ require("dotenv").config();
 const pg = require("pg");
 var types = require("pg").types;
 var moment = require("moment");
-const { Pool, neonConfig } = require("@neondatabase/serverless");
-
-const ws = require("express-ws");
-
-const pool = new Pool({ connection: process.env.DATABASE_URL });
-pool.on("error", (err) => console.error(err)); // deal with e.g. re-connect
-neonConfig.webSocketConstructor = ws;
 
 // parte the Date column into moment format and store it in the database
 types.setTypeParser(1184, (str) => moment.utc(str).format("MM/DD/YYYY"));
@@ -21,7 +14,6 @@ types.setTypeParser(1266, (str) => moment.utc(str).format("MM/DD/YYYY"));
 if (process.env.DATABASE_URL) {
   pg.defaults.ssl = { rejectUnauthorized: false };
 }
-
 // security reason are we going to reject people that are not authorized? No..
 const sharedConfig = {
   client: "pg",
@@ -44,7 +36,7 @@ module.exports = {
   // railway database
   production: {
     ...sharedConfig,
-    connection: pool,
+    connection: process.env.DATABASE_URL,
     pool: { min: 2, max: 10 },
   },
 };
