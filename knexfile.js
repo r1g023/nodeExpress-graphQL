@@ -21,7 +21,7 @@ const sharedConfig = {
   seeds: { directory: "./database/seeds" },
 };
 
-// connect to DB_CONNECTION_STRING
+// connect to DB_CONNECTION_STRING.
 
 module.exports = {
   development: {
