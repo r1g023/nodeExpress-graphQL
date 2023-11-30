@@ -56,3 +56,6 @@ node_modules/
 
 # add .vscode to gitignore
 .vscode/
+
+# add .eslinttrc to gitignore
+.eslintrc.js
