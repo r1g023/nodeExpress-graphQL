@@ -59,7 +59,3 @@ node_modules/
 
 # add .eslinttrc to gitignore
 .eslintrc.js
-
-# add dockerfile and fly.toml to gitignore
-Dockerfile
-fly.toml

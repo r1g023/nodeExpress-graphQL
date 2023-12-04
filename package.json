@@ -55,6 +55,7 @@
     "pg": "^8.10.0"
   },
   "devDependencies": {
+    "@flydotio/dockerfile": "^0.4.11",
     "eslint": "^8.37.0",
     "eslint-plugin-react": "^7.32.2",
     "nodemon": "^2.0.22"
