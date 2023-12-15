@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const expressGraphQL = require("express-graphql").graphqlHTTP;
+// const expressGraphQL = require("express-graphql").graphqlHTTP;
+const { createHandler } = require("graphql-http/lib/use/express");
 const { GraphQLSchema, GraphQLObjectType, GraphQLString } = require("graphql");
 
 const { registerUser, loginUser } = require("../auth/auth-router");
@@ -32,6 +33,6 @@ const schema = new GraphQLSchema({
 
 // router.use(restrictedUser(), checkRole());
 
-router.use("/", expressGraphQL({ schema: schema, graphiql: true }));
+router.use("/", createHandler({ schema: schema, graphiql: true }));
 
 module.exports = router;
