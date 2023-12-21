@@ -14,6 +14,7 @@ types.setTypeParser(1266, (str) => moment.utc(str).format("MM/DD/YYYY"));
 if (process.env.DATABASE_URL) {
   pg.defaults.ssl = { rejectUnauthorized: false };
 }
+//
 // security reason are we going to reject people that are not authorized? No..
 const sharedConfig = {
   client: "pg",
