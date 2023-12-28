@@ -6,12 +6,11 @@
   "scripts": {
     "test": "cross-env NODE_ENV=testing jest --watch --verbose --runInBand --silent --omit=dev",
     "server": "cross-env NODE_ENV=development nodemon index.js",
-    "start": "node index.js --omit=dev",
-    "koyeb": "cross-env NODE_ENV=production node index.js",
+    "start": "node index.js",
     "migrate": "knex migrate:latest",
     "seed": "knex seed:run",
     "rollback": "knex migrate:rollback",
-    "migratekb": "knex migrate:latest --env production"
+    "koyeb": "cross-env NODE_ENV=production nodemon index.js"
   },
   "engines": {
     "node": "20.9.0",
