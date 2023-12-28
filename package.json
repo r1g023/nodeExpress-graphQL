@@ -10,7 +10,8 @@
     "koyeb": "cross-env NODE_ENV=production node index.js",
     "migrate": "knex migrate:latest",
     "seed": "knex seed:run",
-    "rollback": "knex migrate:rollback"
+    "rollback": "knex migrate:rollback",
+    "migratekb": "knex migrate:latest --env production && knex seed:run --env production"
   },
   "engines": {
     "node": "20.9.0",
