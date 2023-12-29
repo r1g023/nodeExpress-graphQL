@@ -2,7 +2,7 @@ const server = require("./api/server");
 const expressPlayground =
   require("graphql-playground-middleware-express").default;
 
-server.get("/playground", expressPlayground({ endpoint: "/graphql/auth" }));
+server.get("/playground", expressPlayground({ endpoint: "/graphql/", /graphql/auth" }));
 
 const port = process.env.PORT || 3000;
 
