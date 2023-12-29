@@ -4,7 +4,6 @@ const expressPlayground =
 
 server.get("/playground", expressPlayground({ endpoint: "/graphql/" }));
 
-server.get("/playground", expressPlayground({ endpoint: "/graphql/auth/" }));
 
 const port = process.env.PORT || 3000;
 
