@@ -4,9 +4,6 @@ const router = express.Router();
 
 const { createHandler } = require("graphql-http/lib/use/express");
 
-const expressPlayground =
-  require("graphql-playground-middleware-express").default;
-
 const { GraphQLSchema, GraphQLObjectType, GraphQLString } = require("graphql");
 
 const { registerUser, loginUser } = require("../auth/auth-router");
@@ -37,9 +34,6 @@ const schema = new GraphQLSchema({
 });
 
 // router.use(restrictedUser(), checkRole());
-
-// use gui playground
 router.use("/", createHandler({ schema: schema }));
-router.use("/playground", expressPlayground({ endpoint: "/graphql/auth" }));
 
 module.exports = router;

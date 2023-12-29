@@ -115,6 +115,4 @@ const schema = new GraphQLSchema({
 // router.use(restrictedUser(), checkRole());
 router.use("/", createHandler({ schema: schema }));
 
-router.use("/playground", createHandler({ endpoint: "/graphql" }));
-
 module.exports = router;
