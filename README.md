@@ -28,12 +28,12 @@ mutation register {
     ): Users
 }
 ```
+__Provide your email, username, password, and role (admin or user).__
 
 ![graphQL api](https://github.com/r1g023/nodeExpress-graphQL/assets/57161327/a773394b-b949-4a76-bb4b-7ce69c8cdc06)
 
-Provide your email, username, password, and role (admin or user).
 
-**Login**
+# **Login**
 
 Once registered, log in using your credentials:
 
@@ -53,7 +53,7 @@ mutation login {
 }
 ```
 
-Provide your email and password to receive a token for authentication.
+__Provide your email and password to receive a token for authentication.__
 
 After logging in, copy the token received and add it to the request headers for authorization in the GraphQL playground.
 
