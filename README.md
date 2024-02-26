@@ -1,18 +1,16 @@
- 
-# GraphQL: Authors and Books with User Authentication
 
-**Introduction**
+# **Introduction**
 
 Welcome to the GraphQL playground for managing, users, posts, comments, and much more. This project leverages Apollo GraphQL, Node Express, PostgreSQL, and JWT for user authentication, providing a robust and secure environment for managing data.
 
 Before proceeding, you need to register or log in to access the GraphQL endpoint.
 
-**Accessing GraphQL Playground**
+# **Accessing GraphQL Playground**
 
 - Open [http://localhost:5000/playground](http://localhost:5000/playground) in your browser after running the server locally.
 - You'll be directed to the GraphQL authentication page to register or log in.
 
-**Registration**
+# **Registration**
 
 To register as a new user:
 
