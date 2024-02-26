@@ -1,12 +1,20 @@
-# GraphQL: Authors and Books with User Authentication
 
-## Introduction
+GraphQL: Authors and Books with User Authentication
+Introduction
+Welcome to the GraphQL playground for managing authors and books. Before proceeding, you need to register or log in to access the GraphQL endpoint.
 
-To access the GraphQL endpoint for managing authors and books, users need to register or log in to obtain authentication credentials. 
+Accessing GraphQL Playground
+Open http://localhost:5000/playground in your browser.
+You'll be directed to the GraphQL authentication page to register or log in.
+Registration
+To register as a new user:
 
-### Registration
-To register as a new user, use the provided mutation:
-```graphql
+Navigate to http://localhost:5000/graphql/auth/ within the GraphQL playground.
+
+Use the following mutation:
+
+graphql
+Copy code
 mutation register {
     registerUser(
         email: String!
@@ -15,11 +23,17 @@ mutation register {
         role: String! # admin or user
     ): Users
 }
-```
+Provide your email, username, password, and role (admin or user).
 
-### Login
-Once registered, users can log in using their credentials:
-```graphql
+Login
+Once registered, log in using your credentials:
+
+Send a POST request to http://localhost:5000/graphql/auth/ within the GraphQL playground.
+
+Use the following mutation:
+
+graphql
+Copy code
 mutation login {
     loginUser(email: String!, password: String!) {
         id
@@ -29,9 +43,11 @@ mutation login {
         token # Use this token for authorization
     }
 }
-```
+Provide your email and password to receive a token for authentication.
 
 After logging in, copy the token received and add it to the request headers for authorization in the GraphQL playground.
+![authToken](https://github.com/r1g023/nodeExpress-graphQL/assets/57161327/01b83a5d-3ab3-4fac-9139-eb4e9069ea3e)
+
 
 ## User Registration and Login
 | Mutations |
