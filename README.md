@@ -53,7 +53,7 @@ mutation login {
 }
 ```
 
-__Provide your email and password to receive a token for authentication.__
+- **Provide your email and password to receive a token for authentication.**
 
 After logging in, copy the token received and add it to the request headers for authorization in the GraphQL playground.
 
