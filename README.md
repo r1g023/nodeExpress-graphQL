@@ -54,8 +54,7 @@ mutation login {
 ```
 
 - **Provide your username and password to receive a token for authentication.**
-
-After logging in, copy the token received and add it to the request headers for authorization in the GraphQL playground.
+- **After logging in, copy the token received and add it to the request headers for authorization in the GraphQL playground.**
 
 ![authToken](https://github.com/r1g023/nodeExpress-graphQL/assets/57161327/01b83a5d-3ab3-4fac-9139-eb4e9069ea3e)
 
