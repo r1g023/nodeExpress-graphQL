@@ -28,7 +28,7 @@ mutation register {
     ): Users
 }
 ```
-__Provide your email, username, password, and role (admin or user).__
+- **Provide your email, username, password, and role (admin or user).**
 
 ![graphQL api](https://github.com/r1g023/nodeExpress-graphQL/assets/57161327/a773394b-b949-4a76-bb4b-7ce69c8cdc06)
 
