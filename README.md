@@ -7,11 +7,11 @@ Welcome to the GraphQL playground for managing authors and books. Before proceed
 
 **Accessing GraphQL Playground**
 
--Open [http://localhost:5000/playground](http://localhost:5000/playground) in your browser after running the server locally.
--You'll be directed to the GraphQL authentication page to register or log in.
-
+- Open [http://localhost:5000/playground](http://localhost:5000/playground) in your browser after running the server locally.
+- You'll be directed to the GraphQL authentication page to register or log in.
 
 **Registration**
+
 To register as a new user:
 
 Navigate to [http://localhost:5000/graphql/auth/](http://localhost:5000/graphql/auth/) within the GraphQL playground.
@@ -28,6 +28,7 @@ mutation register {
     ): Users
 }
 ```
+
 ![graphQL api](https://github.com/r1g023/nodeExpress-graphQL/assets/57161327/a773394b-b949-4a76-bb4b-7ce69c8cdc06)
 
 Provide your email, username, password, and role (admin or user).
@@ -54,17 +55,19 @@ mutation login {
 
 Provide your email and password to receive a token for authentication.
 
--After logging in, copy the token received and add it to the request headers for authorization in the GraphQL playground.
+After logging in, copy the token received and add it to the request headers for authorization in the GraphQL playground.
 
 ![authToken](https://github.com/r1g023/nodeExpress-graphQL/assets/57161327/01b83a5d-3ab3-4fac-9139-eb4e9069ea3e)
 
 ## User Registration and Login
+
 | Mutations |
 |-----------|
 | registerUser: Users | (Required: email, username, password, role) |
 | loginUser(username: String!, password: String!): Users |
 
 ## Users/Posts/Comments Queries and Mutations with User Authentication
+
 | Queries      | Mutations          |
 |--------------|--------------------|
 | getUsers     | updateUser         |
@@ -76,6 +79,7 @@ Provide your email and password to receive a token for authentication.
 |              | updateCommentID    |
 
 ## Authors and Books Data with User Authentication
+
 | Queries     | Mutations                                 |
 |-------------|-------------------------------------------|
 | getAuthors  | createAuthor                              |
@@ -85,9 +89,9 @@ Provide your email and password to receive a token for authentication.
 |             | updateBooks                               |
 
 ### Usage
+
 - After registering or logging in, obtain the authentication token.
 - Use the token in the request headers for authorization.
 - Access the GraphQL endpoint for managing authors and books with user authentication.
 
 For detailed usage instructions, refer to the provided GraphQL playground.
-```
