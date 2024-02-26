@@ -62,7 +62,7 @@ mutation login {
 
 | Mutations |
 |-----------|
-| registerUser: Users | (Required: email, username, password, role) |
+| registerUser: (email: String!, username: String!, password: String!, role: String!): Users |
 | loginUser(username: String!, password: String!): Users |
 
 ## Users/Posts/Comments Queries and Mutations with User Authentication
