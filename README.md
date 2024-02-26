@@ -2,6 +2,7 @@
 GraphQL: Authors and Books with User Authentication
 <br/>
 **Introduction
+<be/>
 Welcome to the GraphQL playground for managing authors and books. Before proceeding, you need to register or log in to access the GraphQL endpoint.
 
 Accessing GraphQL Playground
