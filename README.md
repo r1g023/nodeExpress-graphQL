@@ -3,9 +3,9 @@
 
 **Introduction**
 
-Welcome to the GraphQL playground for managing authors and books. This project leverages Apollo GraphQL, Node Express, and JWT for user authentication, providing a robust and secure environment for managing your data. Whether you're an aspiring developer exploring GraphQL or an experienced engineer seeking a streamlined solution for data management, this project offers a comprehensive platform to work with authors and books efficiently.
+Welcome to the GraphQL playground for managing, users, posts, comments, and much more. This project leverages Apollo GraphQL, Node Express, PostgreSQL, and JWT for user authentication, providing a robust and secure environment for managing data.
 
-Welcome to the GraphQL playground for managing authors and books. Before proceeding, you need to register or log in to access the GraphQL endpoint.
+Before proceeding, you need to register or log in to access the GraphQL endpoint.
 
 **Accessing GraphQL Playground**
 
