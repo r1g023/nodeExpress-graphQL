@@ -10,11 +10,8 @@ Welcome to the GraphQL playground for managing authors and books. Before proceed
 -Open [http://localhost:5000/playground](http://localhost:5000/playground) in your browser after running the server locally.
 -You'll be directed to the GraphQL authentication page to register or log in.
 
-![graphQL api](https://github.com/r1g023/nodeExpress-graphQL/assets/57161327/e6a5b55c-b0dc-4762-ab8a-225a0284ea87)
 
 **Registration**
-![graphQL api](https://github.com/r1g023/nodeExpress-graphQL/assets/57161327/362c221c-1a39-42f3-bda5-f6a0d761cf48)
-
 To register as a new user:
 
 Navigate to [http://localhost:5000/graphql/auth/](http://localhost:5000/graphql/auth/) within the GraphQL playground.
@@ -31,6 +28,7 @@ mutation register {
     ): Users
 }
 ```
+![graphQL api](https://github.com/r1g023/nodeExpress-graphQL/assets/57161327/a773394b-b949-4a76-bb4b-7ce69c8cdc06)
 
 Provide your email, username, password, and role (admin or user).
 
