@@ -1,25 +1,26 @@
+```markdown
+# GraphQL: Authors and Books with User Authentication
 
-GraphQL: Authors and Books with User Authentication
-<br/>
-**Introduction
-<br/>
+**Introduction**
+
 Welcome to the GraphQL playground for managing authors and books. Before proceeding, you need to register or log in to access the GraphQL endpoint.
 
-Accessing GraphQL Playground
-Open http://localhost:5000/playground in your browser.
-**You'll be directed to the GraphQL authentication page to register or log in.
+**Accessing GraphQL Playground**
+
+-Open [http://localhost:5000/playground](http://localhost:5000/playground) in your browser after running the server locally.
+-You'll be directed to the GraphQL authentication page to register or log in.
 
 ![graphQL api](https://github.com/r1g023/nodeExpress-graphQL/assets/57161327/e6a5b55c-b0dc-4762-ab8a-225a0284ea87)
 
-__Registration__
+**Registration**
+
 To register as a new user:
 
-Navigate to http://localhost:5000/graphql/auth/ within the GraphQL playground.
+Navigate to [http://localhost:5000/graphql/auth/](http://localhost:5000/graphql/auth/) within the GraphQL playground.
 
 Use the following mutation:
 
-graphql
-Copy code
+```graphql
 mutation register {
     registerUser(
         email: String!
@@ -28,17 +29,19 @@ mutation register {
         role: String! # admin or user
     ): Users
 }
+```
+
 Provide your email, username, password, and role (admin or user).
 
-Login
+**Login**
+
 Once registered, log in using your credentials:
 
-Send a POST request to http://localhost:5000/graphql/auth/ within the GraphQL playground.
+Send a POST request to [http://localhost:5000/graphql/auth/](http://localhost:5000/graphql/auth/) within the GraphQL playground.
 
 Use the following mutation:
 
-graphql
-Copy code
+```graphql
 mutation login {
     loginUser(email: String!, password: String!) {
         id
@@ -48,11 +51,13 @@ mutation login {
         token # Use this token for authorization
     }
 }
+```
+
 Provide your email and password to receive a token for authentication.
 
-After logging in, copy the token received and add it to the request headers for authorization in the GraphQL playground.
-![authToken](https://github.com/r1g023/nodeExpress-graphQL/assets/57161327/01b83a5d-3ab3-4fac-9139-eb4e9069ea3e)
+-After logging in, copy the token received and add it to the request headers for authorization in the GraphQL playground.
 
+![authToken](https://github.com/r1g023/nodeExpress-graphQL/assets/57161327/01b83a5d-3ab3-4fac-9139-eb4e9069ea3e)
 
 ## User Registration and Login
 | Mutations |
@@ -86,3 +91,4 @@ After logging in, copy the token received and add it to the request headers for 
 - Access the GraphQL endpoint for managing authors and books with user authentication.
 
 For detailed usage instructions, refer to the provided GraphQL playground.
+```
