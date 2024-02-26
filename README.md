@@ -12,9 +12,9 @@ Before proceeding, you need to register or log in to access the GraphQL endpoint
 
 # **Registration**
 
-To register as a new user:
+## To register as a new user:
 
-Navigate to [http://localhost:5000/graphql/auth/](http://localhost:5000/graphql/auth/) within the GraphQL playground.
+- **Navigate to [http://localhost:5000/graphql/auth/](http://localhost:5000/graphql/auth/) within the GraphQL playground.**
 
 Use the following mutation:
 
@@ -37,9 +37,9 @@ mutation register {
 
 **Once registered, log in using your credentials:**
 
-Navigate to [http://localhost:5000/graphql/auth/](http://localhost:5000/graphql/auth/) within the GraphQL playground.
+- **Navigate to [http://localhost:5000/graphql/auth/](http://localhost:5000/graphql/auth/) within the GraphQL playground.**
 
-Use the following mutation:
+__Use the following mutation:__
 
 ```graphql
 mutation login {
