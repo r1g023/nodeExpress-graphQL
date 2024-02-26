@@ -13,6 +13,7 @@ Welcome to the GraphQL playground for managing authors and books. Before proceed
 ![graphQL api](https://github.com/r1g023/nodeExpress-graphQL/assets/57161327/e6a5b55c-b0dc-4762-ab8a-225a0284ea87)
 
 **Registration**
+![graphQL api](https://github.com/r1g023/nodeExpress-graphQL/assets/57161327/362c221c-1a39-42f3-bda5-f6a0d761cf48)
 
 To register as a new user:
 
