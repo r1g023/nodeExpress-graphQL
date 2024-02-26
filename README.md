@@ -1,77 +1,67 @@
-# GraphQL -- Authors and Books with user authentication 
+# GraphQL: Authors and Books with User Authentication
 
+## Introduction
 
+To access the GraphQL endpoint for managing authors and books, users need to register or log in to obtain authentication credentials. 
 
-_GET_ [https://nodeexpress-graphql-production.up.railway.app/graphql]
-
-1) you will be prompted to go to graphql/auth to register or login in order to access the graphql endpoint.
-
-
-
-_REGISTER_
-_POST_ [https://nodeexpress-graphql-production.up.railway.app/graphql/auth]
-
-1) You will register as a new user
-2) Password is hashed and salted, actual password is not stored anywhere in the database.
-3) Graphql endpoint is available at an admin level. If you register as a user, you will not have access to the Graphql endpoint at the user level.
-   
- ```javascript
-           mutation register {
-            registerUser(
-                email: String!
-                username: String!
-                password: String!
-                role: String! -- admin or user
-                ): Users
-            }
-```           
-   
-_LOGIN_
-_POST_ https://node-express-graphql-api.herokuapp.com/graphql/auth
-
-1) you will login as a user after registering for the first time.
-2) Once logged in, you will receive a token, use this token on client request headers, specifically authorization to get access to the graphql endpoint. 
-3) I recommend using the chrome ModHeader extension to add the token to the request headers or using your own GraphQL client.
-4) [ModHeader](https://chrome.google.com/webstore/detail/modheader/idgpnmonknjnojddfkpgkljpfnnfcklj?hl=en)
-   
- ```javascript
-           mutation login {
-            loginUser(email: String!, password: String!) {
-                    id
-                    username
-                    email
-                    role
-                    token - _*This is the token you will use to access the graphql endpoint*_
-             }
-            }
+### Registration
+To register as a new user, use the provided mutation:
+```graphql
+mutation register {
+    registerUser(
+        email: String!
+        username: String!
+        password: String!
+        role: String! # admin or user
+    ): Users
+}
 ```
 
-# User Registration and Login
+### Login
+Once registered, users can log in using their credentials:
+```graphql
+mutation login {
+    loginUser(email: String!, password: String!) {
+        id
+        username
+        email
+        role
+        token # Use this token for authorization
+    }
+}
+```
+
+After logging in, copy the token received and add it to the request headers for authorization in the GraphQL playground.
+
+## User Registration and Login
 | Mutations |
-|----------|
-| registerUser: Users |
-| loginUser(username: String!password: String!): Users |
+|-----------|
+| registerUser: Users | (Required: email, username, password, role) |
+| loginUser(username: String!, password: String!): Users |
 
+## Users/Posts/Comments Queries and Mutations with User Authentication
+| Queries      | Mutations          |
+|--------------|--------------------|
+| getUsers     | updateUser         |
+| getUserById  | deleteUser         |
+| getPosts     | createPost         |
+| getPostId    | updatePost         |
+| getComments  | deletePost         |
+| getCommentId | addComment         |
+|              | updateCommentID    |
 
-## Users/Posts/Comments queries and mutations with user authentication
-| Queries | Mutations |
-|---------| -----------|
-| getUsers: [Users] | updateUser: Users |
-| getUserById: Users | deleteUser: Users |
-| getPosts: [Posts] | createPost: Posts  |
-| getPostId: Posts | updatePost: Posts   **__\|__** **__\|__** deletePost: Posts |
-| getComments: [Comments] | addComment: Comments |
-| getCommentId: Comments | updateCommentID: Comments |
+## Authors and Books Data with User Authentication
+| Queries     | Mutations                                 |
+|-------------|-------------------------------------------|
+| getAuthors  | createAuthor                              |
+| getAuthorId | deleteAuthor                              |
+| getBooks    | addBook                                   |
+| getBookId   | deleteBook                                |
+|             | updateBooks                               |
 
+### Usage
+- After registering or logging in, obtain the authentication token.
+- Use the token in the request headers for authorization.
+- Access the GraphQL endpoint for managing authors and books with user authentication.
 
-### Authors and Books data with user authentication
-| Queries | Mutations |
-|-------|-----------|
-| getAuthors: [Author] | createAuthor(name: String!): Author **__\|__** **__\|__** deleteAuthor(id: Int!): Author |                 
-| getAuthorId(id: Int!): Author | updateAuthorId(id: Int!name: String!): Author |
-| getBooks: [Books] | addBook(name: String!author_id: Int!): Books **__\|__** **__\|__** deleteBook(id: Int!): Books |
-| getBookId(id: Int!): Books | updateBooks( id: Int! name: String! author_id: Int! ): Books |
-
-
-
-
+For detailed usage instructions, refer to the provided GraphQL playground.
