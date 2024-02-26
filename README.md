@@ -35,9 +35,9 @@ mutation register {
 
 # **Login**
 
-Once registered, log in using your credentials:
+**Once registered, log in using your credentials:**
 
-Send a POST request to [http://localhost:5000/graphql/auth/](http://localhost:5000/graphql/auth/) within the GraphQL playground.
+Navigate to [http://localhost:5000/graphql/auth/](http://localhost:5000/graphql/auth/) within the GraphQL playground.
 
 Use the following mutation:
 
