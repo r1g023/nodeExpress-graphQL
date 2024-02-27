@@ -96,7 +96,6 @@ Authors and Books Management: Efficiently handle authors and books data with aut
 # Usage:
 After registering or logging in, obtain the authentication token.
 Use the token in the request headers for authorization.
-Access the GraphQL endpoint for managing authors and books with user authentication.
-For detailed usage instructions, refer to the provided GraphQL playground.
+Access the GraphQL endpoint for managing data with user authentication.
 
 ## For detailed usage instructions, refer to the provided GraphQL playground.
